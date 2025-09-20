@@ -38,7 +38,6 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
                         .scaleEffect(isFocused ? 1.05 : 1.0)
                         .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isFocused)
                         .focused($isFocused)
-                        //.padding()
                         .padding(.horizontal, Measures.Spacing.medium)
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: Measures.Spacing.medium) {

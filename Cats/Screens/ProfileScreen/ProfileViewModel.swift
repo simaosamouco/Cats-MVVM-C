@@ -26,8 +26,10 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     let breedName: String
     let breedDescription: String
     
+    /// Internal State vars
     private let cat: CatProfileModel
     
+    /// ViewModel dependencies
     private let coordinator: ProfileViewCoordinatorProtocol
     private let catsPersistanceUseCase: CatsPersistanceUseCaseProtocol
     private let getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol
@@ -46,6 +48,8 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         loadImage()
     }
     
+    /// Called by the `ViewController` on `viewWillAppear`
+    /// to update the navigation bar item based on the `Cat` saved status in device memory.
     func checkCatSavedStatus() {
         Task { @MainActor in
             do {
@@ -56,12 +60,16 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         }
     }
     
+    /// Loads the `Cat`s image using the `GetImageFromUrlUseCaseProtocol`
     func loadImage() {
         Task { @MainActor in
             self.image = await getImageFromUrlUseCase.get(from: cat.url)
         }
     }
     
+    /// Called by the `ViewController` when the trailing navigation item gets tapped
+    /// Based on the saved status calls delete or save cat methods
+    /// Displays error message case it fails.
     func didTapSaveButton() {
         Task {
             do {
@@ -75,6 +83,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         }
     }
     
+    /// Attempts to delete `Cat` from device memory
     private func deleteCat() async throws {
         try await catsPersistanceUseCase.deleteCat(
             id: cat.id,
@@ -83,6 +92,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         )
     }
     
+    /// Attempts to save `Cat` in device memory
     private func saveCat() async throws {
         try await catsPersistanceUseCase.saveCat(
             id: cat.id,

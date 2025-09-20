@@ -32,11 +32,9 @@ class SettingsViewController: UIViewController {
         let swiftUIView = SettingsView(viewModel: viewModel)
         let hostingController = UIHostingController(rootView: swiftUIView)
 
-        // Add as child VC
         addChild(hostingController)
         view.addSubview(hostingController.view)
 
-        // Set layout
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             hostingController.view.topAnchor.constraint(

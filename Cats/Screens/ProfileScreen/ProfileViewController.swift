@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController {
         viewModel.checkCatSavedStatus()
     }
     
+    /// Adds trailing item to `Navigation Bar`
     private func setupNavigationBar() {
         barButton = UIBarButtonItem(
             image: UIImage(systemName: "bookmark"),
@@ -51,6 +52,9 @@ class ProfileViewController: UIViewController {
         viewModel.didTapSaveButton()
     }
     
+    /// Subscribes to the view model’s `isCatSavedPublisher` and updates
+    /// the navigation bar item’s image to show the cat’s saved state
+    /// (`bookmark.fill` when saved, `bookmark` when not).
     private func bindViewModel() {
         viewModel.isCatSavedPublisher
             .receive(on: RunLoop.main)
