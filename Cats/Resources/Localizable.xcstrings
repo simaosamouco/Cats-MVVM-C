@@ -1,0 +1,393 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "about.contentText.first" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a proof-of-concept app using **MVVM-C**.  \n                The goal is to create a **loose and scalable architecture**, where new features can be easily added, navigation is seamless, and the code is testable."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este é um aplicativo de **prova de conceito** utilizando **MVVM-C**.  \nO objetivo é criar uma **arquitetura flexível e escalável**, onde novas funcionalidades possam ser facilmente adicionadas, a navegação seja fluida e o código seja testável.\n"
+          }
+        }
+      }
+    },
+    "about.contentText.fourth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Coordinator layer decouples navigation logic from the view model. \n                Navigation is handled using a **Navigation Controller**, which provides access to useful native methods such as **viewDidLoad** and **viewWillAppear**. \n                The implementation is flexible, so changing the navigation is as simple as modifying a single line of abstracted code."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A camada de **Coordinator** desacopla a lógica de navegação do view model.  \nA navegação é tratada por meio de um **Navigation Controller**, que fornece acesso a métodos nativos úteis como **viewDidLoad** e **viewWillAppear**.  \nA implementação é flexível, então mudar a navegação é tão simples quanto modificar uma única linha de código abstraído.\n"
+          }
+        }
+      }
+    },
+    "about.contentText.second" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Everything is **abstracted**, so that new implementations of certain features can be added without affecting the rest of the app."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tudo é **abstraído**, de forma que novas implementações de certos recursos possam ser adicionadas sem afetar o restante do aplicativo.\n"
+          }
+        }
+      }
+    },
+    "about.contentText.third" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "For example, data persistence: a new implementation can be used as long as the existing protocols are followed.  \n                It is not tied to **SwiftData**—**Realm** or **CoreData** could easily be implemented instead."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por exemplo, persistência de dados: uma nova implementação pode ser utilizada desde que os protocolos existentes sejam seguidos.  \nNão está preso ao **SwiftData** — **Realm** ou **CoreData** poderiam ser facilmente implementados em seu lugar.\n"
+          }
+        }
+      }
+    },
+    "about.navigationBox.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigation Examples"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Exemplos de Navegação"
+          }
+        }
+      }
+    },
+    "about.subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MVVM-C Architecture"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Arquitetura MVVM-C"
+          }
+        }
+      }
+    },
+    "about.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proof of Concept"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Prova de Conceito"
+          }
+        }
+      }
+    },
+    "appTheme.displayName.dark" : {
+      "comment" : "Escuro",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escuro"
+          }
+        }
+      }
+    },
+    "appTheme.displayName.light" : {
+      "comment" : "Claro",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Claro"
+          }
+        }
+      }
+    },
+    "appTheme.displayName.system" : {
+      "comment" : "Sistema",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sistema"
+          }
+        }
+      }
+    },
+    "Back" : {
+
+    },
+    "catsList.textField.placeholder" : {
+      "comment" : "Procurar pelo nome...",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search by name…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Procurar pelo nome…"
+          }
+        }
+      }
+    },
+    "catsList.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cats"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gatos"
+          }
+        }
+      }
+    },
+    "error.alert.defaultTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ups, something went wrong…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ups, algo correu mal."
+          }
+        }
+      }
+    },
+    "errors.decodingFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decoding failed."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha ao descodificar."
+          }
+        }
+      }
+    },
+    "errors.fetchingDataFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching data failed."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha a obter data."
+          }
+        }
+      }
+    },
+    "errors.invalidURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The URL provided is invalid."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O URL fornecido é inválido."
+          }
+        }
+      }
+    },
+    "savedCats.emptyState.subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add some cats to your favorites to see them displayed here."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Adiciona gatos aos favoritos para os veres exibidos aqui."
+          }
+        }
+      }
+    },
+    "savedCats.emptyState.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are no saved cats…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não existem gatos guardados…"
+          }
+        }
+      }
+    },
+    "savedCats.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved Cats"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gatos Guardados"
+          }
+        }
+      }
+    },
+    "settings.aboutRow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About the app"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sobre a aplicação"
+          }
+        }
+      }
+    },
+    "settings.themeRow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theme"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema"
+          }
+        }
+      }
+    },
+    "settings.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Definições"
+          }
+        }
+      }
+    },
+    "Test Screen" : {
+
+    },
+    "Theme" : {
+
+    }
+  },
+  "version" : "1.0"
+}
