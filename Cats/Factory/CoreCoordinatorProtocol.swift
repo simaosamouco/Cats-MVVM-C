@@ -31,7 +31,10 @@ extension CoreCoordinatorProtocol {
     
     /// .pushViewController(viewController, animated: true)
     /// - Parameter viewController: destination `UIViewController`
-    func goToScreen(_ viewController: UIViewController) {
+    func goToScreen(_ viewController: UIViewController, hideTabBar: Bool = false) {
+        if hideTabBar {
+            viewController.hidesBottomBarWhenPushed = true
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
     
