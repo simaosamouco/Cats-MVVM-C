@@ -46,7 +46,7 @@ struct AboutView<ViewModel: AboutViewModelProtocol>: View  {
                     .foregroundStyle(.secondary)
                     .padding()
 
-                VStack(spacing: Measures.Spacing.ultraTight) {
+                VStack(spacing: Measures.Spacing.small) {
                     SettingsRow(title: "Modal") { viewModel.didTapModalButton() }
                     SettingsRow(title: "Modal full screen") { viewModel.didTapFullScreenModalButton() }
                     SettingsRow(title: "Push") { viewModel.didTapPushButton() }
