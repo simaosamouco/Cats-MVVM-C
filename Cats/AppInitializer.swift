@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// A utility class responsible for initializing and configuring
+/// global app-wide appearance and theme settings.
 final class AppInitializer {
     
     private let appThemeUseCase: AppThemeUseCaseProtocol
@@ -15,11 +17,14 @@ final class AppInitializer {
         self.appThemeUseCase = appThemeUseCase
     }
 
+    /// Configures the app’s theme based on the current saved preference.
+    /// Retrieves the active theme and applies it across the app.
     func configureAppTheme() {
         let theme = appThemeUseCase.getCurrentTheme()
         appThemeUseCase.switchTheme(to: theme)
     }
     
+    /// Configures the appearance of the `UITabBar` across the app.
     func configureTabBar() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -40,6 +45,8 @@ final class AppInitializer {
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     
+    /// Configures the global appearance of the `UINavigationBar`.
+    /// - Applies the system label color as the default tint color
     func configureNavigationBar() {
         UINavigationBar.appearance().tintColor = .label
     }
