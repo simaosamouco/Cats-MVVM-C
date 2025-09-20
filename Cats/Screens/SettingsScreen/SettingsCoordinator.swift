@@ -29,7 +29,7 @@ final class SettingsCoordinator: SettingsCoordinatorProtocol {
         let aboutVC = factory.createAboutViewController(
             navController: coreCoordinator.navigationController
         )
-        coreCoordinator.goToScreen(aboutVC)
+        coreCoordinator.goToScreen(aboutVC, hideTabBar: true)
     }
     
 }
