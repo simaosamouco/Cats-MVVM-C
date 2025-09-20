@@ -1,12 +1,11 @@
 //
 //  CatProfileModel.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 29/08/2025.
 //
 
 import Foundation
-
 
 struct CatProfileModel {
     

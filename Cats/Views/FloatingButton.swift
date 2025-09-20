@@ -1,6 +1,6 @@
 //
 //  FloatingButton.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 10/09/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  AboutViewController.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 30/08/2025.
 //

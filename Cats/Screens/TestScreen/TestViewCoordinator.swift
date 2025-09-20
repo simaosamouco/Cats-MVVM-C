@@ -1,6 +1,6 @@
 //
 //  TestCoordinator.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 01/09/2025.
 //

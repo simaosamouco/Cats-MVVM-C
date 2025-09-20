@@ -1,6 +1,6 @@
 //
 //  Factory+Registration.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 02/08/2025.
 //

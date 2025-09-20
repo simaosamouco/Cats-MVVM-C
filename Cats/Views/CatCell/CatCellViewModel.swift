@@ -1,6 +1,6 @@
 //
 //  CatCellViewModel.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 07/08/2025.
 //

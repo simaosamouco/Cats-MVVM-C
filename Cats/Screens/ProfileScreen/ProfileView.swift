@@ -1,6 +1,6 @@
 //
 //  ProfileView.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 08/08/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  GetImageFromUrlUseCaseProtocol.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 06/08/2025.
 //

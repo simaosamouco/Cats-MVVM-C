@@ -1,6 +1,6 @@
 //
 //  DomainModelConvertible.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 11/09/2025.
 //

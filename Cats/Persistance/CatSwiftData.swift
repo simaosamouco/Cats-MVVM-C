@@ -1,6 +1,6 @@
 //
 //  CatSwiftData.swift
-//  DogsTest
+//  Cats
 //
 //  Created by Simão Neves Samouco on 07/08/2025.
 //
@@ -28,7 +28,7 @@ final class CatSwiftData {
     
 }
 
-// MARK: - CatSwiftData Extension
+// MARK: - DomainModelConvertible
 extension CatSwiftData: DomainModelConvertible {
     
     typealias DomainModel = Cat
