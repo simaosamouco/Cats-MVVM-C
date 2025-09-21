@@ -53,6 +53,12 @@ struct AboutView<ViewModel: AboutViewModelProtocol>: View  {
                     SettingsRow(title: "Change Tab") { viewModel.didTapChangeTabButton() }
                 }
                 .padding(Measures.Spacing.small)
+                .shadow(
+                    color: .black.opacity(0.3),
+                    radius: Measures.CornerRadius.medium,
+                    x: 0,
+                    y: Measures.Spacing.compact
+                )
             }
             .background(
                 RoundedRectangle(cornerRadius: Measures.CornerRadius.xxLarge, style: .continuous)
