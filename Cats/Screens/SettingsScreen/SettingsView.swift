@@ -44,12 +44,6 @@ struct SettingsView<ViewModel: SettingsViewModelProtocol>: View {
                 .onChange(of: viewModel.selectedTheme) {
                     viewModel.didSwitchTheme(to: viewModel.selectedTheme)
                 }
-                .shadow(
-                    color: .black.opacity(0.3),
-                    radius: Measures.CornerRadius.medium,
-                    x: 0,
-                    y: Measures.Spacing.compact
-                )
                 
                 SettingsRow(title: "settings.aboutRow".localized) {
                     viewModel.didTapAboutRow()
@@ -59,6 +53,12 @@ struct SettingsView<ViewModel: SettingsViewModelProtocol>: View {
             }
             .padding(.top, Measures.Spacing.regular)
             .padding(.horizontal, Measures.Spacing.medium)
+            .shadow(
+                color: .black.opacity(0.3),
+                radius: Measures.CornerRadius.medium,
+                x: 0,
+                y: Measures.Spacing.compact
+            )
         }
     }
 }
