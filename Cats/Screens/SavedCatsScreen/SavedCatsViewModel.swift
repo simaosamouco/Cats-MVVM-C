@@ -17,8 +17,8 @@ protocol SavedCatsViewModelProtocol: ObservableObject {
 final class SavedCatsViewModel: SavedCatsViewModelProtocol {
     
     /// Vars published to the `View`
-    @Published private(set) var cats: [CatCellViewModel] = []
-    @Published private(set) var isLoading: Bool = false
+    @Published var cats: [CatCellViewModel] = []
+    @Published var isLoading: Bool = false
     
     /// Internal State Vars
     private var catsModels: [Cat] = []

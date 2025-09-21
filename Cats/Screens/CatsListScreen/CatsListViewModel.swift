@@ -30,9 +30,9 @@ protocol CatsListViewModelProtocol: ObservableObject {
 final class CatsListViewModel: CatsListViewModelProtocol {
     
     /// Vars published to the `View`
-    @Published private(set) var publishedCats: [CatCellViewModel] = []
-    @Published private(set) var isLoading: Bool = false
-    @Published private(set) var isLoadingPagination: Bool = false
+    @Published var publishedCats: [CatCellViewModel] = []
+    @Published var isLoading: Bool = false
+    @Published var isLoadingPagination: Bool = false
     @Published var searchText = ""
     
     /// Internal State vars
