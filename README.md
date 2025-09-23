@@ -2,6 +2,22 @@
 
 This is a proof of concept for an iOS app using MVVM-C with several design patterns that follow the SOLID principles and Clean Code practices. The goal is to create a simple application using a scalable and testable architecture.
 
+<br>
+
+<div align="center">
+
+### 📱 Live Demo
+
+
+
+https://github.com/user-attachments/assets/d10c7764-b00f-42ae-83c2-13274bd19997
+
+
+
+</div>
+
+<br>
+
 ## ⚙️ How it works
 
 By following the MVVM architecture, all of the logic around a certain screen is contained in the View Model, making the View as "dumb" as possible. This could have been implemented in a more literal way if the view model provided all of the text and images to the view. For a simple project like this it felt unnecessary.
