@@ -86,7 +86,7 @@ So the TabBarScreen is responsible for providing all of the information necessar
 
 ## 📋 Requirements
 
-- iOS 15.0+
+- iOS 17.0+ (due to SwiftData)
 - Xcode 15.0+
 - Swift 5.9+
 
