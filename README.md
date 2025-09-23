@@ -8,11 +8,7 @@ This is a proof of concept for an iOS app using MVVM-C with several design patte
 
 ### 📱 Live Demo
 
-
-
 https://github.com/user-attachments/assets/d10c7764-b00f-42ae-83c2-13274bd19997
-
-
 
 </div>
 
@@ -54,7 +50,23 @@ This works surprisingly well. The View really has just a single responsibility a
 Each screen has 4 files associated with it: view, view controller, view model and coordinator.    
 The connection between these is made via protocols—they don't know the concrete implementation of each other.
 
-Although this works just fine, when creating a new screen, it's a little verbose. Creating all of those files and connecting them via protocols and such. To optimize this, I created an Xcode file template. So by simply creating a new file and giving it a name, the four files get instantly created and connected. There is even a commented part in the view controller showing the method the factory should implement, so it's just copy and paste.
+Although this works just fine, when creating a new screen, it's a little verbose. Creating all of those files and connecting them via protocols and such.   
+To optimize this, I created an Xcode file template. So by simply creating a new file and giving it a name, the four files get instantly created and connected. There is even a commented part in the view controller showing the method the factory should implement, so it's just copy and paste.
+
+<br>
+
+<div align="center">
+
+### 📱 File Creation Demo
+
+
+https://github.com/user-attachments/assets/de4f7ab1-fcc6-43f9-8379-d71736d6cb07
+
+
+
+</div>
+
+<br>
 
 ## 📱 Tab Bar Configuration
 
