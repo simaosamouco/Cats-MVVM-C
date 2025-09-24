@@ -24,7 +24,8 @@ final class AppInitializer {
         appThemeUseCase.switchTheme(to: theme)
     }
     
-    /// Configures the appearance of the `UITabBar` across the app.
+    /// Configures the appearance of the SwiftUI TabView.
+    /// This method configures the underlying UITabBar appearance that SwiftUI uses.
     func configureTabBar() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()

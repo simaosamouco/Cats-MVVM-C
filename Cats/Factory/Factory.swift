@@ -18,6 +18,9 @@ protocol FactoryProtocol: AnyObject {
     func createAboutViewController(navController: UINavigationController) -> AboutViewController
     func createTestViewController(navController: UINavigationController, isModallyPresented: Bool) -> TestViewController
     
+    // Add registration capability to the protocol
+    func registerTabBarCoordinator(_ coordinator: TabBarCoordinatorProtocol)
+    
 }
 
 final class Factory: FactoryProtocol {
@@ -30,7 +33,10 @@ final class Factory: FactoryProtocol {
     
     func createTabBarController() -> MainTabBarController {
         let tabCoor = MainTabBarController(factory: self)
+        
+        // Register the coordinator now that it exists
         register(TabBarCoordinatorProtocol.self, instance: tabCoor)
+        
         return tabCoor
     }
     
@@ -140,5 +146,9 @@ final class Factory: FactoryProtocol {
               )
           )
       }
+    
+    func registerTabBarCoordinator(_ coordinator: TabBarCoordinatorProtocol) {
+        register(TabBarCoordinatorProtocol.self, instance: coordinator)
+    }
     
 }

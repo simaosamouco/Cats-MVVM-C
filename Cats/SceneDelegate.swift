@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,21 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let factory = Factory()
+        // Create the SwiftUI content view
+        let contentView = ContentView()
         
-        let appThemeUseCase = factory.resolve(AppThemeUseCaseProtocol.self)
-        let initializer = AppInitializer(appThemeUseCase: appThemeUseCase)
+        // Create a UIHostingController to host the SwiftUI view
+        let hostingController = UIHostingController(rootView: contentView)
         
-        initializer.configureNavigationBar()
-        initializer.configureTabBar()
-        
-        let tabBarController = factory.createTabBarController()
-        tabBarController.configureTabs()
-        
+        // Set up the window with the hosting controller
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = tabBarController
+        window?.rootViewController = hostingController
         window?.makeKeyAndVisible()
-        initializer.configureAppTheme()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
