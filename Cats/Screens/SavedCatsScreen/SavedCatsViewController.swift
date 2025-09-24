@@ -27,6 +27,14 @@ final class SavedCatsViewController: UIViewController {
         self.title = "savedCats.title".localized
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Ensure cats are loaded when the view appears
+        // This is a backup in case SwiftUI's onAppear doesn't trigger
+        viewModel.getSavedCats()
+    }
+    
     private func addSwiftUIView() {
         guard let viewModel = viewModel as? SavedCatsViewModel else { return }
         let SavedCatsView = SavedCatsView(viewModel: viewModel)

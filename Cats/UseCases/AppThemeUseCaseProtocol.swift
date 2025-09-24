@@ -45,11 +45,17 @@ final class AppThemeUseCase: AppThemeUseCaseProtocol {
     /// This method:
     /// 1. Applies the theme immediately to the active window.
     /// 2. Saves the theme to local storage for use on app launch.
+    /// 3. Posts a notification to inform observers of the theme change.
     /// - Parameter theme: The `Theme` to apply.
     func switchTheme(to theme: Theme) {
         applyTheme(UIUserInterfaceStyle(rawValue: theme.value) ?? .light)
         /// Saves `Theme` in local config to use on app launch.
         localConfig.set(theme.value, for: .appTheme)
+        
+        /// Notify observers that theme has changed
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .themeDidChange, object: theme)
+        }
     }
     
     private func applyTheme(_ style: UIUserInterfaceStyle) {
@@ -58,4 +64,9 @@ final class AppThemeUseCase: AppThemeUseCaseProtocol {
             window.overrideUserInterfaceStyle = style
         }
     }
+}
+
+// MARK: - Notification Names
+extension Notification.Name {
+    static let themeDidChange = Notification.Name("ThemeDidChange")
 }
