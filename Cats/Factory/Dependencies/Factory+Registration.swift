@@ -67,6 +67,11 @@ extension Factory {
             return CatsPersistanceUseCase(repository: repository)
         }
 
+        /// NavigationHandler (shared singleton)
+        registerLazy(NavigationHandlerProtocol.self) {
+            return NavigationHandler(factory: self)
+        }
+
         /// CoreCoordinatorProtocol (factory with argument)
         registerFactory(CoreCoordinatorProtocol.self) { navigationController in
             return CoreCoordinator(navigationController: navigationController)

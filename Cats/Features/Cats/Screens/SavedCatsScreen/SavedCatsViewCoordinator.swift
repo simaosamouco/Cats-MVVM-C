@@ -13,18 +13,25 @@ protocol SavedCatsCoordinatorProtocol {
     func goToCatProfile(_ cat: Cat)
 }
 
-final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol {
+/// Updated coordinator that uses the new route-based navigation system
+final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    private let factory: FactoryProtocol
+    // MARK: - UniversalNavigationCoordinator Requirements
+    let factory: FactoryProtocol
+    let coreCoordinator: CoreCoordinatorProtocol
+    let navigationHandler: NavigationHandlerProtocol
+    
+    // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
-    private let coreCoordinator: CoreCoordinatorProtocol
     
     init(factory: FactoryProtocol,
          coreCoordinator: CoreCoordinatorProtocol,
-         tabBarCoordinator: TabBarCoordinatorProtocol) {
+         tabBarCoordinator: TabBarCoordinatorProtocol,
+         navigationHandler: NavigationHandlerProtocol) {
         self.factory = factory
         self.coreCoordinator = coreCoordinator
         self.tabBarCoordinator = tabBarCoordinator
+        self.navigationHandler = navigationHandler
     }
     
     func changeTab(to screen: TabBarScreen) {
@@ -36,11 +43,12 @@ final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol {
     }
     
     func goToCatProfile(_ cat: Cat) {
-        let profileVC = factory.createProfileViewController(
-            navController: coreCoordinator.navigationController,
-            cat: cat.toCatProfile()
+        // Using the new route-based navigation system
+        handleNavigation(
+            for: CatsRoute.catProfile,
+            with: cat,
+            presentationStyle: .push(hideTabBar: false)
         )
-        coreCoordinator.goToScreen(profileVC)
     }
     
 }

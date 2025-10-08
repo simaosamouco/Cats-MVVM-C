@@ -8,19 +8,18 @@
 import UIKit
 
 protocol FactoryProtocol: AnyObject {
-    
     func createTabBarController() -> MainTabBarController
-    func createCatsListController(navController: UINavigationController) -> CatsListViewController
-    func createSavedCatsViewController(navController: UINavigationController) -> SavedCatsViewController
-    func createProfileViewController(navController: UINavigationController,
-                                     cat: CatProfileModel) -> ProfileViewController
-    func createSettingsViewController(navController: UINavigationController) -> SettingsViewController
-    func createAboutViewController(navController: UINavigationController) -> AboutViewController
-    func createTestViewController(navController: UINavigationController, isModallyPresented: Bool) -> TestViewController
-    
 }
 
-final class Factory: FactoryProtocol {
+// MARK: - Extend Factory to implement specific protocols
+extension FactoryProtocol where Self: CatsViewControllerFactoryProtocol & SettingsViewControllerFactoryProtocol & TestViewControllerFactoryProtocol {
+    // This ensures the main factory can still be used where needed
+}
+
+final class Factory: FactoryProtocol,
+                     CatsViewControllerFactoryProtocol,
+                     SettingsViewControllerFactoryProtocol,
+                     TestViewControllerFactoryProtocol {
     
     var dependencies: [String: Any] = [:]
     
@@ -38,6 +37,7 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
+        let navigationHandler = resolve(NavigationHandlerProtocol.self)
         let catsServices = resolve(CatsServicesProtocol.self)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
@@ -47,7 +47,8 @@ final class Factory: FactoryProtocol {
                 coordinator: CatsListCoordinator(
                     factory: self,
                     coreCoordinator: coreCoordinator,
-                    tabBarCoordinator: tabBarCoordinator
+                    tabBarCoordinator: tabBarCoordinator,
+                    navigationHandler: navigationHandler
                 ), catsService: catsServices,
                 getImageFromUrlUseCase: getImageUseCase,
                 catsPersistanceUseCase: catsPersistanceUseCase,
@@ -60,6 +61,7 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
+        let navigationHandler = resolve(NavigationHandlerProtocol.self)
         let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         return SavedCatsViewController(
@@ -67,7 +69,8 @@ final class Factory: FactoryProtocol {
                 coordinator: SavedCatsCoordinator(
                     factory: self,
                     coreCoordinator: coreCoordinator,
-                    tabBarCoordinator: tabBarCoordinator
+                    tabBarCoordinator: tabBarCoordinator,
+                    navigationHandler: navigationHandler
                 ),
                 catsPersistanceUseCase: catsPersistanceUseCase,
                 getImageFromUrlUseCase: getImageUseCase
@@ -80,6 +83,7 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
+        let navigationHandler = resolve(NavigationHandlerProtocol.self)
         let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         return ProfileViewController(
@@ -88,7 +92,8 @@ final class Factory: FactoryProtocol {
                 coordinator: ProfileViewCoordinator(
                     factory: self,
                     coreCoordinator: coreCoordinator,
-                    tabBarCoordinator: tabBarCoordinator
+                    tabBarCoordinator: tabBarCoordinator,
+                    navigationHandler: navigationHandler
                 ),
                 catsPersistanceUseCase: catsPersistanceUseCase,
                 getImageFromUrlUseCase: getImageUseCase
@@ -100,13 +105,15 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
+        let navigationHandler = resolve(NavigationHandlerProtocol.self)
         let appThemeUseCase = resolve(AppThemeUseCaseProtocol.self)
         return SettingsViewController(
             viewModel: SettingsViewModel(
                 coordinator: SettingsCoordinator(
                     factory: self,
                     coreCoordinator: coreCoordinator,
-                    tabBarCoordinator: tabBarCoordinator
+                    tabBarCoordinator: tabBarCoordinator,
+                    navigationHandler: navigationHandler
                 ),
                 appThemeUseCase: appThemeUseCase
             )
@@ -117,12 +124,14 @@ final class Factory: FactoryProtocol {
           let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                         argument: navController)
           let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
+          let navigationHandler = resolve(NavigationHandlerProtocol.self)
           return AboutViewController(
               viewModel: AboutViewModel(
                   coordinator: AboutViewCoordinator(
                       factory: self,
                       coreCoordinator: coreCoordinator,
-                      tabBarCoordinator: tabBarCoordinator
+                      tabBarCoordinator: tabBarCoordinator,
+                      navigationHandler: navigationHandler
                   )
               )
           )
@@ -131,11 +140,13 @@ final class Factory: FactoryProtocol {
     func createTestViewController(navController: UINavigationController, isModallyPresented: Bool) -> TestViewController {
           let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                         argument: navController)
+          let navigationHandler = resolve(NavigationHandlerProtocol.self)
           return TestViewController(
               viewModel: TestViewModel(
                   coordinator: TestViewCoordinator(
                       factory: self,
-                      coreCoordinator: coreCoordinator
+                      coreCoordinator: coreCoordinator,
+                      navigationHandler: navigationHandler
                   ), isModallyPresented: isModallyPresented
               )
           )

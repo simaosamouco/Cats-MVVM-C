@@ -13,9 +13,9 @@ protocol TabBarCoordinatorProtocol: AnyObject {
 
 final class MainTabBarController: UITabBarController, TabBarCoordinatorProtocol {
     
-    weak var factory: FactoryProtocol?
+    weak var factory: Factory?
     
-    init(factory: FactoryProtocol) {
+    init(factory: Factory) {
         self.factory = factory
         super.init(nibName: nil, bundle: nil)
     }

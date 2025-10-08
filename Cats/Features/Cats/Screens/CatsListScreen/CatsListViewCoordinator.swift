@@ -15,18 +15,24 @@ protocol CatsListCoordinatorProtocol {
     
 }
 
-final class CatsListCoordinator: CatsListCoordinatorProtocol {
+final class CatsListCoordinator: CatsListCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    private let factory: FactoryProtocol
+    // MARK: - UniversalNavigationCoordinator Requirements
+    let factory: FactoryProtocol
+    let coreCoordinator: CoreCoordinatorProtocol
+    let navigationHandler: NavigationHandlerProtocol
+    
+    // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
-    private let coreCoordinator: CoreCoordinatorProtocol
     
     init(factory: FactoryProtocol,
          coreCoordinator: CoreCoordinatorProtocol,
-         tabBarCoordinator: TabBarCoordinatorProtocol) {
+         tabBarCoordinator: TabBarCoordinatorProtocol,
+         navigationHandler: NavigationHandlerProtocol) {
         self.factory = factory
         self.coreCoordinator = coreCoordinator
         self.tabBarCoordinator = tabBarCoordinator
+        self.navigationHandler = navigationHandler
     }
     
     func showError(_ error: Error) {
@@ -34,11 +40,11 @@ final class CatsListCoordinator: CatsListCoordinatorProtocol {
     }
     
     func goToCatProfile(_ cat: Cat) {
-        let profileVC = factory.createProfileViewController(
-            navController: coreCoordinator.navigationController,
-            cat: cat.toCatProfile()
+        handleNavigation(
+            for: CatsRoute.catProfile,
+            with: cat,
+            presentationStyle: .push(hideTabBar: true)
         )
-        coreCoordinator.goToScreen(profileVC)
     }
     
     func changeTab(to screen: TabBarScreen) {
