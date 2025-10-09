@@ -16,15 +16,6 @@ protocol Route {
     var feature: AppFeature { get }
 }
 
-/// Defines all features in the app
-enum AppFeature {
-    case cats
-    case settings
-    case profile
-    case test
-    // Add more features as your app grows
-}
-
 /// Protocol that all route factories must conform to
 protocol RouteFactory {
     /// Creates a view controller for the given route
