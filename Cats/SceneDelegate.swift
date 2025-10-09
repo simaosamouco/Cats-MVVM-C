@@ -17,9 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let factory = Factory()
+        let factory = AppFactory()
         
-        let appThemeUseCase = factory.resolve(AppThemeUseCaseProtocol.self)
+        let appThemeUseCase = factory.dependencyContainer.resolve(AppThemeUseCaseProtocol.self)
         let initializer = AppInitializer(appThemeUseCase: appThemeUseCase)
         
         initializer.configureNavigationBar()

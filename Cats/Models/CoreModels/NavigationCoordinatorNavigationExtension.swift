@@ -9,7 +9,6 @@ import Foundation
 
 /// Protocol that all coordinators should adopt to get universal navigation capabilities
 protocol UniversalNavigationCoordinator {
-    var factory: FactoryProtocol { get }
     var coreCoordinator: CoreCoordinatorProtocol { get }
     var navigationHandler: NavigationHandlerProtocol { get }
 }

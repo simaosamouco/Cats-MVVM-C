@@ -8,28 +8,22 @@
 import Foundation
 
 protocol CatsListCoordinatorProtocol {
-    
     func showError(_ error: Error)
     func goToCatProfile(_ cat: Cat)
     func changeTab(to screen: TabBarScreen)
-    
 }
 
 final class CatsListCoordinator: CatsListCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    // MARK: - UniversalNavigationCoordinator Requirements
-    let factory: FactoryProtocol
     let coreCoordinator: CoreCoordinatorProtocol
     let navigationHandler: NavigationHandlerProtocol
     
     // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
     
-    init(factory: FactoryProtocol,
-         coreCoordinator: CoreCoordinatorProtocol,
+    init(coreCoordinator: CoreCoordinatorProtocol,
          tabBarCoordinator: TabBarCoordinatorProtocol,
          navigationHandler: NavigationHandlerProtocol) {
-        self.factory = factory
         self.coreCoordinator = coreCoordinator
         self.tabBarCoordinator = tabBarCoordinator
         self.navigationHandler = navigationHandler

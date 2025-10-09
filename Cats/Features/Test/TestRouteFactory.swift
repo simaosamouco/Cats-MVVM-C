@@ -1,5 +1,5 @@
 //
-//  TestViewControllerFactoryProtocol.swift
+//  TestRouteFactory.swift
 //  Cats
 //
 //  Created by Simão Neves Samouco on 08/10/2025.
@@ -7,17 +7,13 @@
 
 import UIKit
 
-protocol TestViewControllerFactoryProtocol {
-    func createTestViewController(navController: UINavigationController, isModallyPresented: Bool) -> TestViewController
-}
-
 /// Factory for Test feature routes
 final class TestRouteFactory: RouteFactory {
     
-    private let testFactory: TestViewControllerFactoryProtocol
+    private let testFeatureFactory: TestFeatureFactory
     
-    init(testFactory: TestViewControllerFactoryProtocol) {
-        self.testFactory = testFactory
+    init(testFeatureFactory: TestFeatureFactory) {
+        self.testFeatureFactory = testFeatureFactory
     }
     
     func createViewController(for route: any Route, 
@@ -30,7 +26,7 @@ final class TestRouteFactory: RouteFactory {
         
         switch testRoute {
         case .test(let isModallyPresented):
-            return testFactory.createTestViewController(
+            return testFeatureFactory.createTestViewController(
                 navController: navigationController,
                 isModallyPresented: isModallyPresented
             )

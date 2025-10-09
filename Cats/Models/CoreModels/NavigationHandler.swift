@@ -23,18 +23,18 @@ protocol NavigationHandlerProtocol {
 /// Centralized navigation handler that manages routing across the entire app
 final class NavigationHandler: NavigationHandlerProtocol {
     
-    private let factory: Factory // Use concrete Factory type since it implements all protocols
+    private let factory: AppFactory // Use concrete AppFactory type since it implements all protocols
     private var routeFactories: [AppFeature: any RouteFactory] = [:]
     
-    init(factory: Factory) {
+    init(factory: AppFactory) {
         self.factory = factory
         setupRouteFactories()
     }
     
     private func setupRouteFactories() {
-        routeFactories[.cats] = CatsRouteFactory(catsFactory: factory)
-        routeFactories[.settings] = SettingsRouteFactory(settingsFactory: factory)
-        routeFactories[.test] = TestRouteFactory(testFactory: factory)
+        routeFactories[.cats] = CatsRouteFactory(catsFeatureFactory: factory.catsFeatureFactory)
+        routeFactories[.settings] = SettingsRouteFactory(settingsFeatureFactory: factory.settingsFeatureFactory)
+        routeFactories[.test] = TestRouteFactory(testFeatureFactory: factory.testFeatureFactory)
     }
     
     /// Central method to handle navigation to any route in the app
@@ -48,8 +48,8 @@ final class NavigationHandler: NavigationHandlerProtocol {
                           data: Any? = nil,
                           presentationStyle: NavigationPresentationStyle = .push(hideTabBar: false)) {
         
-        guard let factory = routeFactories[route.feature],
-              let viewController = factory.createViewController(
+        guard let routeFactory = routeFactories[route.feature],
+              let viewController = routeFactory.createViewController(
                 for: route,
                 navigationController: navigationController,
                 data: data

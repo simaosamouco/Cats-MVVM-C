@@ -14,15 +14,11 @@ protocol TestViewCoordinatorProtocol {
 /// Updated coordinator that uses the new route-based navigation system
 final class TestViewCoordinator: TestViewCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    // MARK: - UniversalNavigationCoordinator Requirements
-    let factory: FactoryProtocol
     let coreCoordinator: CoreCoordinatorProtocol
     let navigationHandler: NavigationHandlerProtocol
     
-    init(factory: FactoryProtocol,
-         coreCoordinator: CoreCoordinatorProtocol,
+    init(coreCoordinator: CoreCoordinatorProtocol,
          navigationHandler: NavigationHandlerProtocol) {
-        self.factory = factory
         self.coreCoordinator = coreCoordinator
         self.navigationHandler = navigationHandler
     }

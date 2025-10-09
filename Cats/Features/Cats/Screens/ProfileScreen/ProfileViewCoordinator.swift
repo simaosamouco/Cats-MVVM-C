@@ -12,21 +12,18 @@ protocol ProfileViewCoordinatorProtocol  {
 }
 
 /// Updated coordinator that uses the new route-based navigation system
-final class ProfileViewCoordinator: ProfileViewCoordinatorProtocol, UniversalNavigationCoordinator {
-    
-    // MARK: - UniversalNavigationCoordinator Requirements
-    let factory: FactoryProtocol
+final class ProfileViewCoordinator: ProfileViewCoordinatorProtocol,
+                                    UniversalNavigationCoordinator {
+
     let coreCoordinator: CoreCoordinatorProtocol
     let navigationHandler: NavigationHandlerProtocol
     
     // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
     
-    init(factory: FactoryProtocol,
-         coreCoordinator: CoreCoordinatorProtocol,
+    init(coreCoordinator: CoreCoordinatorProtocol,
          tabBarCoordinator: TabBarCoordinatorProtocol,
          navigationHandler: NavigationHandlerProtocol) {
-        self.factory = factory
         self.coreCoordinator = coreCoordinator
         self.tabBarCoordinator = tabBarCoordinator
         self.navigationHandler = navigationHandler

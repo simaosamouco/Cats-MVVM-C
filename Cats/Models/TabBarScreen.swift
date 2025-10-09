@@ -51,16 +51,16 @@ enum TabBarScreen: CaseIterable {
     }
     
     /// Returns a `UIViewController` for each case in the enum.
-    /// Updated to use the concrete Factory class that implements all specific factory protocols
-    func makeViewController(factory: Factory,
+    /// Updated to use the concrete AppFactory class that implements all specific factory protocols
+    func makeViewController(factory: AppFactory,
                             navController: UINavigationController) -> UIViewController? {
         switch self {
         case .catsList:
-            return factory.createCatsListController(navController: navController)
+            return factory.catsFeatureFactory.createCatsListController(navController: navController)
         case .savedCats:
-            return factory.createSavedCatsViewController(navController: navController)
+            return factory.catsFeatureFactory.createSavedCatsViewController(navController: navController)
         case .settings:
-            return factory.createSettingsViewController(navController: navController)
+            return factory.settingsFeatureFactory.createSettingsViewController(navController: navController)
         }
     }
     
