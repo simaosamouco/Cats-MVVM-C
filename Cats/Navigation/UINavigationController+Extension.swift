@@ -7,26 +7,11 @@
 
 import UIKit
 
-protocol CoreCoordinatorProtocol {
-    var navigationController: UINavigationController { get }
-}
-
-public class CoreCoordinator: CoreCoordinatorProtocol {
-    
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-}
-
-/// Extension to provide default methods for `CoreCoordinatorProtocol`
-extension CoreCoordinatorProtocol {
+extension UINavigationController {
     
     /// popViewController(animated: true)
     func goBack() {
-        navigationController.popViewController(animated: true)
+        self.popViewController(animated: true)
     }
     
     /// .pushViewController(viewController, animated: true)
@@ -35,30 +20,30 @@ extension CoreCoordinatorProtocol {
         if hideTabBar {
             viewController.hidesBottomBarWhenPushed = true
         }
-        navigationController.pushViewController(viewController, animated: true)
+        self.pushViewController(viewController, animated: true)
     }
     
     /// .present(viewController, animated: true, completion: nil)
     /// - Parameter viewController: `UIViewController` to be presented
     func presentScreen(_ viewController: UIViewController) {
         viewController.modalPresentationStyle = .popover
-        navigationController.present(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
     /// .dismiss(animated: true)
     func dismiss() {
-        navigationController.dismiss(animated: true)
+        self.dismiss(animated: true)
     }
     
     /// .popToRootViewController(animated: true)
     func popToRoot() {
-        navigationController.popToRootViewController(animated: true)
+        self.popToRootViewController(animated: true)
     }
     
     /// .setViewControllers([viewController], animated: true)
     /// - Parameter viewController: `UIViewController` to set as root
     func setRootViewController(_ viewController: UIViewController) {
-        navigationController.setViewControllers([viewController], animated: true)
+        self.setViewControllers([viewController], animated: true)
     }
     
     /// .popToViewController(viewController, animated: animated)
@@ -70,8 +55,8 @@ extension CoreCoordinatorProtocol {
     ///   - type: `UIViewController` type
     ///   - animated: Should animate the pop action
     func popToViewController(ofType type: AnyClass, animated: Bool = true) {
-        if let viewController = navigationController.viewControllers.first(where: { $0.isKind(of: type) }) {
-            navigationController.popToViewController(viewController, animated: animated)
+        if let viewController = self.viewControllers.first(where: { $0.isKind(of: type) }) {
+            self.popToViewController(viewController, animated: animated)
         }
     }
     
@@ -82,7 +67,7 @@ extension CoreCoordinatorProtocol {
     /// - Parameter viewController: `UIViewController` to be presented modally
     func presentFullscreen(_ viewController: UIViewController) {
         viewController.modalPresentationStyle = .fullScreen
-        navigationController.present(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
     /// Attempts to open the specified URL.
@@ -124,8 +109,7 @@ extension CoreCoordinatorProtocol {
         }
 
         Task { @MainActor in
-            navigationController.present(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
-    
 }

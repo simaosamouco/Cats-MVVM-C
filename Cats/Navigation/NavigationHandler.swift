@@ -56,21 +56,19 @@ final class NavigationHandler: NavigationHandlerProtocol {
             print("❌ NavigationHandler: Unable to create view controller for route: \(route)")
             return
         }
-        
-        let coreCoordinator = CoreCoordinator(navigationController: navigationController)
-        
+       
         switch presentationStyle {
         case .push(let hideTabBar):
-            coreCoordinator.goToScreen(viewController, hideTabBar: hideTabBar)
+            navigationController.goToScreen(viewController, hideTabBar: hideTabBar)
             
         case .present:
-            coreCoordinator.presentScreen(viewController)
+            navigationController.presentScreen(viewController)
             
         case .presentFullscreen:
-            coreCoordinator.presentFullscreen(viewController)
+            navigationController.presentFullscreen(viewController)
             
         case .setAsRoot:
-            coreCoordinator.setRootViewController(viewController)
+            navigationController.setRootViewController(viewController)
         default:
             return
         }
@@ -85,16 +83,14 @@ final class NavigationHandler: NavigationHandlerProtocol {
                           data: Any?,
                           presentationStyle: NavigationPresentationStyle) {
         
-        let coreCoordinator = CoreCoordinator(navigationController: navigationController)
-        
         switch presentationStyle {
         case .alert:
             guard let message = data as? String else { return }
-            coreCoordinator.showAlert(message: message)
+            navigationController.showAlert(message: message)
         case .goBack:
-            coreCoordinator.goBack()
+            navigationController.goBack()
         case .dismiss:
-            coreCoordinator.dismiss()
+            navigationController.dismiss()
         default:
             return
         }
