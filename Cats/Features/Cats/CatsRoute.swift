@@ -8,13 +8,15 @@
 
 /// Routes available in the Cats feature
 enum CatsRoute: Route {
+    
     case catListAPI
     case savedCats
     case catProfile
     
-    typealias Factory = CatsRouteFactory
+    typealias Factory = CatsRouteBuilder
     
     var feature: AppFeature {
         return .cats
     }
+    
 }

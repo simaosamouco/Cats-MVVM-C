@@ -11,7 +11,7 @@ enum SettingsRoute: Route {
     case settings
     case about
     
-    typealias Factory = SettingsRouteFactory
+    typealias Factory = SettingsRouteBuilder
     
     var feature: AppFeature {
         return .settings

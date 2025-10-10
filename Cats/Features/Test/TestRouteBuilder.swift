@@ -8,12 +8,12 @@
 import UIKit
 
 /// Factory for Test feature routes
-final class TestRouteFactory: RouteFactory {
+final class TestRouteBuilder: RouteFactory {
     
-    private let testFeatureFactory: TestFeatureFactory
+    private let factory: TestFeatureFactory
     
-    init(testFeatureFactory: TestFeatureFactory) {
-        self.testFeatureFactory = testFeatureFactory
+    init(factory: TestFeatureFactory) {
+        self.factory = factory
     }
     
     func createViewController(for route: any Route, 
@@ -26,7 +26,7 @@ final class TestRouteFactory: RouteFactory {
         
         switch testRoute {
         case .test(let isModallyPresented):
-            return testFeatureFactory.createTestViewController(
+            return factory.createTestViewController(
                 navController: navigationController,
                 isModallyPresented: isModallyPresented
             )

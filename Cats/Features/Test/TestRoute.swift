@@ -9,7 +9,7 @@
 enum TestRoute: Route {
     case test(isModallyPresented: Bool)
     
-    typealias Factory = TestRouteFactory
+    typealias Factory = TestRouteBuilder
     
     var feature: AppFeature {
         return .test

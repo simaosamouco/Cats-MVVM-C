@@ -8,12 +8,12 @@
 import UIKit
 
 /// Factory responsible for creating view controllers for Cats feature routes
-final class CatsRouteFactory: RouteFactory {
+final class CatsRouteBuilder: RouteFactory {
     
-    private let catsFeatureFactory: CatsViewControllerFactoryProtocol
+    private let factory: CatsViewControllerFactoryProtocol
     
-    init(catsFeatureFactory: CatsViewControllerFactoryProtocol) {
-        self.catsFeatureFactory = catsFeatureFactory
+    init(factory: CatsViewControllerFactoryProtocol) {
+        self.factory = factory
     }
     
     func createViewController(for route: any Route, 
@@ -26,17 +26,17 @@ final class CatsRouteFactory: RouteFactory {
         
         switch catsRoute {
         case .catListAPI:
-            return catsFeatureFactory.createCatsListController(navController: navigationController)
+            return factory.createCatsListController(navController: navigationController)
             
         case .savedCats:
-            return catsFeatureFactory.createSavedCatsViewController(navController: navigationController)
+            return factory.createSavedCatsViewController(navController: navigationController)
             
         case .catProfile:
             guard let cat = data as? Cat else {
                 assertionFailure("CatsRoute.catProfile requires Cat data")
                 return nil
             }
-            return catsFeatureFactory.createProfileViewController(
+            return factory.createProfileViewController(
                 navController: navigationController,
                 cat: cat.toCatProfile()
             )

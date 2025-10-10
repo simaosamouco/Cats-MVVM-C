@@ -32,9 +32,9 @@ final class NavigationHandler: NavigationHandlerProtocol {
     }
     
     private func setupRouteFactories() {
-        routeFactories[.cats] = CatsRouteFactory(catsFeatureFactory: factory.catsFeatureFactory)
-        routeFactories[.settings] = SettingsRouteFactory(settingsFeatureFactory: factory.settingsFeatureFactory)
-        routeFactories[.test] = TestRouteFactory(testFeatureFactory: factory.testFeatureFactory)
+        routeFactories[.cats] = CatsRouteBuilder(factory: factory.catsFeatureFactory)
+        routeFactories[.settings] = SettingsRouteBuilder(factory: factory.settingsFeatureFactory)
+        routeFactories[.test] = TestRouteBuilder(factory: factory.testFeatureFactory)
     }
     
     /// Central method to handle navigation to any route in the app

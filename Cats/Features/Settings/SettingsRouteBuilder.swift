@@ -8,12 +8,12 @@
 import UIKit
 
 /// Factory for Settings feature routes
-final class SettingsRouteFactory: RouteFactory {
+final class SettingsRouteBuilder: RouteFactory {
     
-    private let settingsFeatureFactory: SettingsViewControllerFactoryProtocol
+    private let factory: SettingsViewControllerFactoryProtocol
     
-    init(settingsFeatureFactory: SettingsViewControllerFactoryProtocol) {
-        self.settingsFeatureFactory = settingsFeatureFactory
+    init(factory: SettingsViewControllerFactoryProtocol) {
+        self.factory = factory
     }
     
     func createViewController(for route: any Route, 
@@ -26,10 +26,10 @@ final class SettingsRouteFactory: RouteFactory {
         
         switch settingsRoute {
         case .settings:
-            return settingsFeatureFactory.createSettingsViewController(navController: navigationController)
+            return factory.createSettingsViewController(navController: navigationController)
             
         case .about:
-            return settingsFeatureFactory.createAboutViewController(navController: navigationController)
+            return factory.createAboutViewController(navController: navigationController)
         }
     }
 }
