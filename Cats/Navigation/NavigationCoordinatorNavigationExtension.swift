@@ -5,11 +5,11 @@
 //  Created by Simão Neves Samouco on 07/10/2025.
 //
 
-import Foundation
+import UIKit
 
 /// Protocol that all coordinators should adopt to get universal navigation capabilities
 protocol UniversalNavigationCoordinator {
-    var coreCoordinator: CoreCoordinatorProtocol { get }
+    var navigationController: UINavigationController { get }
     var navigationHandler: NavigationHandlerProtocol { get }
 }
 
@@ -27,7 +27,7 @@ extension UniversalNavigationCoordinator {
                          presentationStyle: NavigationPresentationStyle = .push(hideTabBar: false)) {
         navigationHandler.handleNavigation(
             for: route,
-            from: coreCoordinator,
+            navigationController: navigationController,
             data: object,
             presentationStyle: presentationStyle
         )
@@ -36,7 +36,7 @@ extension UniversalNavigationCoordinator {
     func handleNavigation(with object: Any? = nil,
                           presentationStyle: NavigationPresentationStyle = .push(hideTabBar: false)) {
         navigationHandler.handleNavigation(
-            from: coreCoordinator,
+            navigationController: navigationController,
             data: object,
             presentationStyle: presentationStyle
         )

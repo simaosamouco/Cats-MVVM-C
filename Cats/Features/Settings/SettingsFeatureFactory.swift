@@ -22,7 +22,6 @@ final class SettingsFeatureFactory: SettingsViewControllerFactoryProtocol {
     }
     
     func createSettingsViewController(navController: UINavigationController) -> SettingsViewController {
-        let coreCoordinator = container.resolve(CoreCoordinatorProtocol.self, argument: navController)
         let tabBarCoordinator = container.resolve(TabBarCoordinatorProtocol.self)
         let navigationHandler = container.resolve(NavigationHandlerProtocol.self)
         let appThemeUseCase = container.resolve(AppThemeUseCaseProtocol.self)
@@ -30,9 +29,9 @@ final class SettingsFeatureFactory: SettingsViewControllerFactoryProtocol {
         return SettingsViewController(
             viewModel: SettingsViewModel(
                 coordinator: SettingsCoordinator(
-                    coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator,
-                    navigationHandler: navigationHandler
+                    navigationHandler: navigationHandler,
+                    navigationController: navController
                 ),
                 appThemeUseCase: appThemeUseCase
             )
@@ -40,16 +39,15 @@ final class SettingsFeatureFactory: SettingsViewControllerFactoryProtocol {
     }
     
     func createAboutViewController(navController: UINavigationController) -> AboutViewController {
-        let coreCoordinator = container.resolve(CoreCoordinatorProtocol.self, argument: navController)
         let tabBarCoordinator = container.resolve(TabBarCoordinatorProtocol.self)
         let navigationHandler = container.resolve(NavigationHandlerProtocol.self)
         
         return AboutViewController(
             viewModel: AboutViewModel(
                 coordinator: AboutViewCoordinator(
-                    coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator,
-                    navigationHandler: navigationHandler
+                    navigationHandler: navigationHandler,
+                    navigationController: navController
                 )
             )
         )

@@ -5,7 +5,7 @@
 //  Created by Simão Neves Samouco on 01/09/2025.
 //
 
-import Foundation
+import UIKit
 
 protocol TestViewCoordinatorProtocol {
     func goBack(_ isModallyPresented: Bool)
@@ -14,20 +14,21 @@ protocol TestViewCoordinatorProtocol {
 /// Updated coordinator that uses the new route-based navigation system
 final class TestViewCoordinator: TestViewCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    let coreCoordinator: CoreCoordinatorProtocol
+    var navigationController: UINavigationController
     let navigationHandler: NavigationHandlerProtocol
     
-    init(coreCoordinator: CoreCoordinatorProtocol,
-         navigationHandler: NavigationHandlerProtocol) {
-        self.coreCoordinator = coreCoordinator
+    init(navigationHandler: NavigationHandlerProtocol,
+         navigationController: UINavigationController) {
         self.navigationHandler = navigationHandler
+        self.navigationController = navigationController
     }
     
     func goBack(_ isModallyPresented: Bool) {
         if isModallyPresented {
-            coreCoordinator.dismiss()
+            //coreCoordinator.dismiss()
+            handleNavigation(presentationStyle: .dismiss)
         } else {
-            coreCoordinator.goBack()
+            handleNavigation(presentationStyle: .goBack)
         }
     }
     

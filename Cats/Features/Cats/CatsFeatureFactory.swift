@@ -23,7 +23,6 @@ final class CatsFeatureFactory: CatsViewControllerFactoryProtocol {
     }
     
     func createCatsListController(navController: UINavigationController) -> CatsListViewController {
-        let coreCoordinator = container.resolve(CoreCoordinatorProtocol.self, argument: navController)
         let tabBarCoordinator = container.resolve(TabBarCoordinatorProtocol.self)
         let navigationHandler = container.resolve(NavigationHandlerProtocol.self)
         let catsServices = container.resolve(CatsServicesProtocol.self)
@@ -34,10 +33,10 @@ final class CatsFeatureFactory: CatsViewControllerFactoryProtocol {
         return CatsListViewController(
             viewModel: CatsListViewModel(
                 coordinator: CatsListCoordinator(
-                    coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator,
-                    navigationHandler: navigationHandler
-                ), 
+                    navigationHandler: navigationHandler,
+                    navigationController: navController
+                ),
                 catsService: catsServices,
                 getImageFromUrlUseCase: getImageUseCase,
                 catsPersistanceUseCase: catsPersistanceUseCase,
@@ -47,7 +46,6 @@ final class CatsFeatureFactory: CatsViewControllerFactoryProtocol {
     }
     
     func createSavedCatsViewController(navController: UINavigationController) -> SavedCatsViewController {
-        let coreCoordinator = container.resolve(CoreCoordinatorProtocol.self, argument: navController)
         let tabBarCoordinator = container.resolve(TabBarCoordinatorProtocol.self)
         let navigationHandler = container.resolve(NavigationHandlerProtocol.self)
         let catsPersistanceUseCase = container.resolve(CatsPersistanceUseCaseProtocol.self)
@@ -56,9 +54,9 @@ final class CatsFeatureFactory: CatsViewControllerFactoryProtocol {
         return SavedCatsViewController(
             viewModel: SavedCatsViewModel(
                 coordinator: SavedCatsCoordinator(
-                    coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator,
-                    navigationHandler: navigationHandler
+                    navigationHandler: navigationHandler,
+                    navigationController: navController
                 ),
                 catsPersistanceUseCase: catsPersistanceUseCase,
                 getImageFromUrlUseCase: getImageUseCase
@@ -68,7 +66,6 @@ final class CatsFeatureFactory: CatsViewControllerFactoryProtocol {
     
     func createProfileViewController(navController: UINavigationController,
                                      cat: CatProfileModel) -> ProfileViewController {
-        let coreCoordinator = container.resolve(CoreCoordinatorProtocol.self, argument: navController)
         let tabBarCoordinator = container.resolve(TabBarCoordinatorProtocol.self)
         let navigationHandler = container.resolve(NavigationHandlerProtocol.self)
         let catsPersistanceUseCase = container.resolve(CatsPersistanceUseCaseProtocol.self)
@@ -78,9 +75,9 @@ final class CatsFeatureFactory: CatsViewControllerFactoryProtocol {
             viewModel: ProfileViewModel(
                 catProfile: cat,
                 coordinator: ProfileViewCoordinator(
-                    coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator,
-                    navigationHandler: navigationHandler
+                    navigationHandler: navigationHandler,
+                    navigationController: navController
                 ),
                 catsPersistanceUseCase: catsPersistanceUseCase,
                 getImageFromUrlUseCase: getImageUseCase

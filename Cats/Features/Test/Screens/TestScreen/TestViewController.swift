@@ -46,19 +46,3 @@ final class TestViewController: UIViewController {
     }
     
 }
-
-//  SCREEN FACTORY METHOD:
-//
-//  func createTestViewController(navController: UINavigationController) -> TestViewController {
-//      let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
-//                                    argument: navController)
-//      let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-//      return TestViewController(
-//          viewModel: TestViewModel(
-//              coordinator: TestViewCoordinator(
-//                  factory: self,
-//                  coreCoordinator: coreCoordinator
-//              )
-//          )
-//      )
-//  }

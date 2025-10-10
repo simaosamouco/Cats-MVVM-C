@@ -14,23 +14,25 @@ protocol ProfileViewCoordinatorProtocol  {
 /// Updated coordinator that uses the new route-based navigation system
 final class ProfileViewCoordinator: ProfileViewCoordinatorProtocol,
                                     UniversalNavigationCoordinator {
-
-    let coreCoordinator: CoreCoordinatorProtocol
+    
+    let navigationController: UINavigationController
     let navigationHandler: NavigationHandlerProtocol
     
     // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
     
-    init(coreCoordinator: CoreCoordinatorProtocol,
-         tabBarCoordinator: TabBarCoordinatorProtocol,
-         navigationHandler: NavigationHandlerProtocol) {
-        self.coreCoordinator = coreCoordinator
+    init(tabBarCoordinator: TabBarCoordinatorProtocol,
+         navigationHandler: NavigationHandlerProtocol,
+         navigationController: UINavigationController) {
+        self.navigationController = navigationController
         self.tabBarCoordinator = tabBarCoordinator
         self.navigationHandler = navigationHandler
     }
     
     func showError(_ error: Error) {
-        coreCoordinator.showAlert(message: error.displayMessage)
+        //coreCoordinator.showAlert(message: error.displayMessage)
+        handleNavigation(with: error.displayMessage,
+                         presentationStyle: .alert)
     }
     
     // MARK: - Example navigation methods (can be added as needed)

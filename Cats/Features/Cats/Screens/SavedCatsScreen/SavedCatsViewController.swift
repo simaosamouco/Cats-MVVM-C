@@ -47,19 +47,3 @@ final class SavedCatsViewController: UIViewController {
     }
     
 }
-
-//  SCREEN FACTORY METHOD:
-//
-//  func createSavedCatsViewController(navController: UINavigationController) -> SavedCatsViewController {
-//      let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
-//                                    argument: navController)
-//      let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-//      return SavedCatsViewController(
-//          viewModel: SavedCatsViewModel(
-//              coordinator: SavedCatsViewCoordinator(
-//                  factory: self,
-//                  coreCoordinator: coreCoordinator
-//              )
-//          )
-//      )
-//  }

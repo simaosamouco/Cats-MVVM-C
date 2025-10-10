@@ -5,7 +5,7 @@
 //  Created by Simão Neves Samouco on 19/09/2025.
 //
 
-import Foundation
+import UIKit
 
 protocol CatsListCoordinatorProtocol {
     func showError(_ error: Error)
@@ -15,18 +15,18 @@ protocol CatsListCoordinatorProtocol {
 
 final class CatsListCoordinator: CatsListCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    let coreCoordinator: CoreCoordinatorProtocol
+    let navigationController: UINavigationController
     let navigationHandler: NavigationHandlerProtocol
     
     // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
     
-    init(coreCoordinator: CoreCoordinatorProtocol,
-         tabBarCoordinator: TabBarCoordinatorProtocol,
-         navigationHandler: NavigationHandlerProtocol) {
-        self.coreCoordinator = coreCoordinator
+    init(tabBarCoordinator: TabBarCoordinatorProtocol,
+         navigationHandler: NavigationHandlerProtocol,
+         navigationController: UINavigationController) {
         self.tabBarCoordinator = tabBarCoordinator
         self.navigationHandler = navigationHandler
+        self.navigationController = navigationController
     }
     
     func showError(_ error: Error) {

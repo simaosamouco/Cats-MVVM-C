@@ -13,13 +13,8 @@ protocol NavigationHandlerProtocol {
                           navigationController: UINavigationController,
                           data: Any?,
                           presentationStyle: NavigationPresentationStyle)
-    
-    func handleNavigation(for route: any Route,
-                          from coreCoordinator: CoreCoordinatorProtocol,
-                          data: Any?,
-                          presentationStyle: NavigationPresentationStyle)
-    
-    func handleNavigation(from coreCoordinator: CoreCoordinatorProtocol,
+ 
+    func handleNavigation(navigationController: UINavigationController,
                           data: Any?,
                           presentationStyle: NavigationPresentationStyle)
 }
@@ -76,40 +71,34 @@ final class NavigationHandler: NavigationHandlerProtocol {
             
         case .setAsRoot:
             coreCoordinator.setRootViewController(viewController)
-        case .alert:
-            break
-        }
-    }
-    
-    /// Convenience method for handling navigation from any coordinator
-    /// - Parameters:
-    ///   - route: The route to navigate to
-    ///   - coreCoordinator: The core coordinator that provides the navigation controller
-    ///   - data: Optional data to pass between screens
-    ///   - presentationStyle: How to present the screen
-    func handleNavigation(for route: any Route,
-                          from coreCoordinator: CoreCoordinatorProtocol,
-                          data: Any? = nil,
-                          presentationStyle: NavigationPresentationStyle = .push(hideTabBar: false)) {
-        
-        handleNavigation(
-            for: route,
-            navigationController: coreCoordinator.navigationController,
-            data: data,
-            presentationStyle: presentationStyle
-        )
-    }
-    
-    func handleNavigation(from coreCoordinator: CoreCoordinatorProtocol,
-                          data: Any?,
-                          presentationStyle: NavigationPresentationStyle) {
-        switch presentationStyle {
-        case .alert:
-            guard let message = data as? String else { return }
-            coreCoordinator.showAlert(message: message)
         default:
             return
         }
     }
+ 
+    /// Central method to handle navigation without the need for a route
+    /// - Parameters:
+    ///   - navigationController: The navigation controller to use for navigation
+    ///   - data: Optional data to pass between screens
+    ///   - presentationStyle: How to navigate (.pop, .dismiss, etc.)
+    func handleNavigation(navigationController: UINavigationController,
+                          data: Any?,
+                          presentationStyle: NavigationPresentationStyle) {
+        
+        let coreCoordinator = CoreCoordinator(navigationController: navigationController)
+        
+        switch presentationStyle {
+        case .alert:
+            guard let message = data as? String else { return }
+            coreCoordinator.showAlert(message: message)
+        case .goBack:
+            coreCoordinator.goBack()
+        case .dismiss:
+            coreCoordinator.dismiss()
+        default:
+            return
+        }
+    }
+    
 }
 

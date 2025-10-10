@@ -70,11 +70,6 @@ extension DependencyContainer {
         /// NavigationHandler (will be registered by AppFactory after creation)
         // Note: NavigationHandler registration is handled by AppFactory to avoid circular dependency
         
-        /// CoreCoordinatorProtocol (factory with argument)
-        registerFactory(CoreCoordinatorProtocol.self) { navigationController in
-            return CoreCoordinator(navigationController: navigationController)
-        }
-        
         /// CatFilterUseCaseProtocol
         registerLazy(CatFilterUseCaseProtocol.self) {
             return CatFilterUseCase()

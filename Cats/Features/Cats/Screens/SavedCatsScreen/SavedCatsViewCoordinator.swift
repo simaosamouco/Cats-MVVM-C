@@ -5,7 +5,7 @@
 //  Created by Simão Neves Samouco on 19/09/2025.
 //
 
-import Foundation
+import UIKit
 
 protocol SavedCatsCoordinatorProtocol {
     func changeTab(to screen: TabBarScreen)
@@ -16,18 +16,18 @@ protocol SavedCatsCoordinatorProtocol {
 /// Updated coordinator that uses the new route-based navigation system
 final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol, UniversalNavigationCoordinator {
     
-    let coreCoordinator: CoreCoordinatorProtocol
+    let navigationController: UINavigationController
     let navigationHandler: NavigationHandlerProtocol
     
     // MARK: - Private Properties
     private let tabBarCoordinator: TabBarCoordinatorProtocol
     
-    init(coreCoordinator: CoreCoordinatorProtocol,
-         tabBarCoordinator: TabBarCoordinatorProtocol,
-         navigationHandler: NavigationHandlerProtocol) {
-        self.coreCoordinator = coreCoordinator
+    init(tabBarCoordinator: TabBarCoordinatorProtocol,
+         navigationHandler: NavigationHandlerProtocol,
+         navigationController: UINavigationController) {
         self.tabBarCoordinator = tabBarCoordinator
         self.navigationHandler = navigationHandler
+        self.navigationController = navigationController
     }
     
     func changeTab(to screen: TabBarScreen) {
@@ -35,7 +35,9 @@ final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol, UniversalNavigat
     }
 
     func showError(_ error: Error) {
-        coreCoordinator.showAlert(message: error.displayMessage)
+        //coreCoordinator.showAlert(message: error.displayMessage)
+        handleNavigation(with: error.displayMessage,
+                         presentationStyle: .alert)
     }
     
     func goToCatProfile(_ cat: Cat) {

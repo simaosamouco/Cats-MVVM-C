@@ -20,16 +20,16 @@ final class TestFeatureFactory: TestViewControllerFactoryProtocol {
         self.container = container
     }
     
-    func createTestViewController(navController: UINavigationController, isModallyPresented: Bool) -> TestViewController {
-        let coreCoordinator = container.resolve(CoreCoordinatorProtocol.self, argument: navController)
+    func createTestViewController(navController: UINavigationController,
+                                  isModallyPresented: Bool) -> TestViewController {
         let navigationHandler = container.resolve(NavigationHandlerProtocol.self)
         
         return TestViewController(
             viewModel: TestViewModel(
                 coordinator: TestViewCoordinator(
-                    coreCoordinator: coreCoordinator,
-                    navigationHandler: navigationHandler
-                ), 
+                    navigationHandler: navigationHandler,
+                    navigationController: navController
+                ),
                 isModallyPresented: isModallyPresented
             )
         )

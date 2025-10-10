@@ -13,4 +13,6 @@ enum NavigationPresentationStyle {
     case presentFullscreen
     case setAsRoot
     case alert
+    case dismiss
+    case goBack
 }
