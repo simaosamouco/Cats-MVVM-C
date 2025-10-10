@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		C39C1A092E970AC700C995B1 /* SavedCatsViewCoordinator 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39C1A082E970AC700C995B1 /* SavedCatsViewCoordinator 2.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		C33B4FB12E756E2B005472C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -31,7 +27,6 @@
 		C33B4F9A2E756E29005472C0 /* Cats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33B4FB02E756E2B005472C0 /* CatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33B4FBA2E756E2B005472C0 /* CatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C39C1A082E970AC700C995B1 /* SavedCatsViewCoordinator 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedCatsViewCoordinator 2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -97,7 +92,6 @@
 				C33B4FB32E756E2B005472C0 /* CatsTests */,
 				C33B4FBD2E756E2B005472C0 /* CatsUITests */,
 				C33B4F9B2E756E29005472C0 /* Products */,
-				C39C1A082E970AC700C995B1 /* SavedCatsViewCoordinator 2.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,7 +249,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C39C1A092E970AC700C995B1 /* SavedCatsViewCoordinator 2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

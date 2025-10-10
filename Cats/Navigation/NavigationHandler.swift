@@ -23,7 +23,7 @@ protocol NavigationHandlerProtocol {
 /// Centralized navigation handler that manages routing across the entire app
 final class NavigationHandler: NavigationHandlerProtocol {
     
-    private let factory: AppFactory // Use concrete AppFactory type since it implements all protocols
+    private let factory: AppFactory
     private var routeFactories: [AppFeature: any RouteFactory] = [:]
     
     init(factory: AppFactory) {
