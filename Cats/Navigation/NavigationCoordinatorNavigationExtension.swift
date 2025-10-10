@@ -22,11 +22,20 @@ extension UniversalNavigationCoordinator {
     ///   - route: The route to navigate to (can be any feature's route)
     ///   - object: Optional data to pass between screens
     ///   - presentationStyle: How to present the screen (defaults to push)
-    func handleNavigation(for route: any Route, 
+    func handleNavigation(for route: any Route,
                          with object: Any? = nil,
                          presentationStyle: NavigationPresentationStyle = .push(hideTabBar: false)) {
         navigationHandler.handleNavigation(
             for: route,
+            from: coreCoordinator,
+            data: object,
+            presentationStyle: presentationStyle
+        )
+    }
+    
+    func handleNavigation(with object: Any? = nil,
+                          presentationStyle: NavigationPresentationStyle = .push(hideTabBar: false)) {
+        navigationHandler.handleNavigation(
             from: coreCoordinator,
             data: object,
             presentationStyle: presentationStyle

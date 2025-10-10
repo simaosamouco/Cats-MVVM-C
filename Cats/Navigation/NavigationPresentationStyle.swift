@@ -12,4 +12,5 @@ enum NavigationPresentationStyle {
     case present
     case presentFullscreen
     case setAsRoot
+    case alert
 }

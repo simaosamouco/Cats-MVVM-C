@@ -30,7 +30,9 @@ final class CatsListCoordinator: CatsListCoordinatorProtocol, UniversalNavigatio
     }
     
     func showError(_ error: Error) {
-        coreCoordinator.showAlert(message: error.displayMessage)
+        //coreCoordinator.showAlert(message: error.displayMessage)
+        handleNavigation(with: error.displayMessage,
+                         presentationStyle: .alert)
     }
     
     func goToCatProfile(_ cat: Cat) {

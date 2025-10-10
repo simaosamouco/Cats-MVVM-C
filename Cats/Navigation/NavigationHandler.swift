@@ -18,6 +18,10 @@ protocol NavigationHandlerProtocol {
                           from coreCoordinator: CoreCoordinatorProtocol,
                           data: Any?,
                           presentationStyle: NavigationPresentationStyle)
+    
+    func handleNavigation(from coreCoordinator: CoreCoordinatorProtocol,
+                          data: Any?,
+                          presentationStyle: NavigationPresentationStyle)
 }
 
 /// Centralized navigation handler that manages routing across the entire app
@@ -72,6 +76,8 @@ final class NavigationHandler: NavigationHandlerProtocol {
             
         case .setAsRoot:
             coreCoordinator.setRootViewController(viewController)
+        case .alert:
+            break
         }
     }
     
@@ -92,6 +98,18 @@ final class NavigationHandler: NavigationHandlerProtocol {
             data: data,
             presentationStyle: presentationStyle
         )
+    }
+    
+    func handleNavigation(from coreCoordinator: CoreCoordinatorProtocol,
+                          data: Any?,
+                          presentationStyle: NavigationPresentationStyle) {
+        switch presentationStyle {
+        case .alert:
+            guard let message = data as? String else { return }
+            coreCoordinator.showAlert(message: message)
+        default:
+            return
+        }
     }
 }
 
