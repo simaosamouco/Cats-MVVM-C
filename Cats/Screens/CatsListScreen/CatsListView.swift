@@ -19,6 +19,21 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
         GridItem(.flexible())
     ]
     
+    private var searchTextField: some View {
+        TextField("catsList.textField.placeholder".localized,
+                  text: $viewModel.searchText)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isFocused ? .blue : .gray, lineWidth: 2)
+                    .animation(.easeInOut(duration: 0.3), value: isFocused)
+            )
+            .scaleEffect(isFocused ? 1.05 : 1.0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isFocused)
+            .focused($isFocused)
+            .padding(.horizontal, Measures.Spacing.medium)
+    }
+    
     var body: some View {
         ZStack {
             VStack {
@@ -27,18 +42,7 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
                         .progressViewStyle(CircularProgressViewStyle())
                         .scaleEffect(1.5)
                 } else {
-                    TextField("catsList.textField.placeholder".localized,
-                              text: $viewModel.searchText)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(isFocused ? .blue : .gray, lineWidth: 2)
-                                .animation(.easeInOut(duration: 0.3), value: isFocused)
-                        )
-                        .scaleEffect(isFocused ? 1.05 : 1.0)
-                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isFocused)
-                        .focused($isFocused)
-                        .padding(.horizontal, Measures.Spacing.medium)
+                    searchTextField
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: Measures.Spacing.medium) {
                             ForEach(viewModel.publishedCats, id: \.id) { catCellViewModel in

@@ -30,11 +30,22 @@ extension Factory {
             let networkService = self.resolve(NetworkServiceProtocol.self)
             return CatsServices(networkService: networkService)
         }
+        
+        registerLazy(ImageCacheProtocol.self) {
+            ImageCache()
+        }
+        
+        registerLazy(ImageRepositoryProtocol.self) {
+            let networkService = self.resolve(NetworkServiceProtocol.self)
+            let imageCache = self.resolve(ImageCacheProtocol.self)
+            return ImageRepository(networkService: networkService,
+                                   imageCache: imageCache)
+        }
 
         /// GetImageFromUrlUseCaseProtocol
         registerLazy(GetImageFromUrlUseCaseProtocol.self) {
-            let networkService = self.resolve(NetworkServiceProtocol.self)
-            return GetImageFromUrlUseCase(networkService: networkService)
+            let imageRepository = self.resolve(ImageRepositoryProtocol.self)
+            return GetImageFromUrlUseCase(imageRepository: imageRepository)
         }
 
         /// ModelContainer

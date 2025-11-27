@@ -25,42 +25,21 @@ protocol GetImageFromUrlUseCaseProtocol {
 
 final class GetImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol {
     
-    private let imageCache: NSCache<NSString, UIImage>
-    private let networkService: NetworkServiceProtocol
+    private let imageRepository: ImageRepositoryProtocol
     private let fallbackImage: UIImage
     
-    init(networkService: NetworkServiceProtocol,
-         imageCache: NSCache<NSString, UIImage> = NSCache(),
+    init(imageRepository: ImageRepositoryProtocol,
          fallbackImage: UIImage = UIImage.defaultErrorImage) {
-        self.networkService = networkService
-        self.imageCache = imageCache
+        self.imageRepository = imageRepository
         self.fallbackImage = fallbackImage
     }
     
     func get(from imageURL: String) async -> UIImage {
-        // Validate URL
-        guard let url = URL(string: imageURL) else {
-            return fallbackImage
-        }
-        
-        // Return cached image if available
-        if let cachedImage = imageCache.object(forKey: NSString(string: imageURL)) {
-            return cachedImage
-        }
-        
-        // Attempt to fetch image from network
         do {
-            let imageData = try await networkService.fetchData(from: url)
-            if let image = UIImage(data: imageData) {
-                imageCache.setObject(image, forKey: NSString(string: imageURL))
-                return image
-            }
+            return try await imageRepository.get(from: imageURL)
         } catch {
             return fallbackImage
         }
-        
-        // Return fallback if all else fails
-        return fallbackImage
     }
 
 }

@@ -13,6 +13,7 @@ protocol CatCellViewModelProtocol: ObservableObject {
     var id: String { get }
     
     func loadImage()
+    func clearImage()
 }
 
 final class CatCellViewModel: CatCellViewModelProtocol {
@@ -38,6 +39,10 @@ final class CatCellViewModel: CatCellViewModelProtocol {
         Task { @MainActor in
             self.image = await getImageFromUrlUseCase.get(from: url)
         }
+    }
+    
+    func clearImage() {
+        image = nil
     }
     
 }

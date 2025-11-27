@@ -67,6 +67,9 @@ struct CatCell<ViewModel: CatCellViewModelProtocol>: View {
                     value: viewModel.image != nil
                 )
         }
+        .onDisappear {
+            viewModel.clearImage()
+        }
     }
 }
 
@@ -80,11 +83,11 @@ final class MockCatCellViewModel: CatCellViewModelProtocol, ObservableObject {
     }
     
     func loadImage() {
-        // Simulate async image loading
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.image = UIImage(systemName: "pawprint.fill")
         }
     }
+    func clearImage() {}
 }
 
 struct CatCell_Previews: PreviewProvider {

@@ -14,6 +14,8 @@ enum CatsErros: Error {
     case decodingFailed
     /// Indicates a network or data fetching failure occurred.
     case fecthingDataFailed
+    // TODO: add documentation here
+    case invalidImageData
     
     /// Provides a localized error description for each error case.
     var errorDescription: String? {
@@ -23,6 +25,9 @@ enum CatsErros: Error {
         case .decodingFailed:
             return "errors.decodingFailed".localized
         case .fecthingDataFailed:
+            return "errors.fetchingDataFailed".localized
+        case .invalidImageData:
+            // TODO: Add string for this case
             return "errors.fetchingDataFailed".localized
         }
     }
