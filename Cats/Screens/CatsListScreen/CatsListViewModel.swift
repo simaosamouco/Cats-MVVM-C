@@ -40,6 +40,7 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     private var catCellViewModels: [CatCellViewModel] = []
     private var catsPage: Int = 0
     private var cancellables = Set<AnyCancellable>()
+    private var getCatsTask: Task<Void, Never>?
     
     /// ViewModel dependencies
     private let coordinator: CatsListCoordinatorProtocol
@@ -61,6 +62,12 @@ final class CatsListViewModel: CatsListViewModelProtocol {
         setupSearchBinding()
     }
     
+    deinit {
+        getCatsTask?.cancel()
+    }
+    
+    // MARK: - Public methods
+    
     /// Called by the `View` to change Tab
     func didTapBookmarkButton() {
         coordinator.changeTab(to: .savedCats)
@@ -75,7 +82,8 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     
     /// Fetches cats from the API, updates the list, and manages loading state.
     func getCats(for type: LoadingType) {
-        Task {
+        getCatsTask?.cancel()
+        getCatsTask = Task {
             toggleLoading(for: type, to: true)
             defer { toggleLoading(for: type, to: false) }
             do {
@@ -97,6 +105,8 @@ final class CatsListViewModel: CatsListViewModelProtocol {
         guard cat.id == publishedCats.last?.id else { return }
         getCats(for: .pagination)
     }
+    
+    // MARK: - Private methods
     
     /// Binds `searchText` to `publishedCats`, filtering results with debounce to update efficiently.
     private func setupSearchBinding() {
