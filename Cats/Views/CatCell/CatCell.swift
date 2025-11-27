@@ -68,7 +68,7 @@ struct CatCell<ViewModel: CatCellViewModelProtocol>: View {
                 )
         }
         .onDisappear {
-            viewModel.clearImage()
+            viewModel.onDisappear()
         }
     }
 }
@@ -87,7 +87,7 @@ final class MockCatCellViewModel: CatCellViewModelProtocol, ObservableObject {
             self.image = UIImage(systemName: "pawprint.fill")
         }
     }
-    func clearImage() {}
+    func onDisappear() {}
 }
 
 struct CatCell_Previews: PreviewProvider {
