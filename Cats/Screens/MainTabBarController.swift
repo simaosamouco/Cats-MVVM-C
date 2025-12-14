@@ -36,7 +36,8 @@ final class MainTabBarController: UITabBarController, TabBarCoordinatorProtocol 
         for screen in TabBarScreen.allCases {
             let navController = UINavigationController()
 
-            if let vc = screen.makeViewController(factory: factory, navController: navController) {
+            if let vc = screen.makeViewController(factory: factory,
+                                                  navController: navController) {
                 vc.tabBarItem = UITabBarItem(
                     title: screen.title,
                     image: screen.image,

@@ -45,19 +45,16 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     /// ViewModel dependencies
     private let coordinator: CatsListCoordinatorProtocol
     private let catsService: CatsServicesProtocol
-    private let catsPersistanceUseCase: CatsPersistanceUseCaseProtocol
     private let getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol
     private let catFilterUseCase: CatFilterUseCaseProtocol
     
     init(coordinator: CatsListCoordinatorProtocol,
          catsService: CatsServicesProtocol,
          getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol,
-         catsPersistanceUseCase: CatsPersistanceUseCaseProtocol,
          catFilterUseCase: CatFilterUseCaseProtocol) {
         self.coordinator = coordinator
         self.catsService = catsService
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
-        self.catsPersistanceUseCase = catsPersistanceUseCase
         self.catFilterUseCase = catFilterUseCase
         setupSearchBinding()
     }
