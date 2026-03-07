@@ -14,41 +14,9 @@ struct SettingsView<ViewModel: SettingsViewModelProtocol>: View {
     var body: some View {
         ScrollView {
             VStack(spacing: Measures.Spacing.medium) {
-                
-                Image(systemName: "cat.circle")
-                    .resizable()
-                    .frame(
-                        width: Measures.Size.xxxLarge,
-                        height: Measures.Size.xxxLarge
-                    )
-                
-                VStack(alignment: .leading, spacing: Measures.Spacing.small) {
-                    Text("settings.themeRow".localized)
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                    
-                    Picker("Theme", selection: $viewModel.selectedTheme) {
-                        ForEach(Theme.allCases, id: \.self) { theme in
-                            Text(theme.displayName).tag(theme)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                .padding(Measures.Spacing.medium)
-                .background(
-                    .ultraThinMaterial,
-                    in: RoundedRectangle(
-                        cornerRadius: Measures.CornerRadius.xLarge
-                    )
-                )
-                .onChange(of: viewModel.selectedTheme) {
-                    viewModel.didSwitchTheme(to: viewModel.selectedTheme)
-                }
-                
-                SettingsRow(title: "settings.aboutRow".localized) {
-                    viewModel.didTapAboutRow()
-                }
-                
+                catIcon
+                themeRow
+                aboutRow
                 Spacer()
             }
             .padding(.top, Measures.Spacing.regular)
@@ -56,11 +24,52 @@ struct SettingsView<ViewModel: SettingsViewModelProtocol>: View {
             .shadow(
                 color: .black.opacity(0.3),
                 radius: Measures.CornerRadius.medium,
-                x: 0,
+                x: .zero,
                 y: Measures.Spacing.compact
             )
         }
     }
+    
+    // MARK: Subviews
+    
+    private var catIcon: some View {
+        Image(systemName: "cat.circle")
+            .resizable()
+            .frame(
+                width: Measures.Size.xxxLarge,
+                height: Measures.Size.xxxLarge
+            )
+    }
+    
+    private var themeRow: some View {
+        VStack(alignment: .leading, spacing: Measures.Spacing.small) {
+            Text("settings.themeRow".localized)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            
+            Picker("Theme", selection: $viewModel.selectedTheme) {
+                ForEach(Theme.allCases, id: \.self) { theme in
+                    Text(theme.displayName).tag(theme)
+                }
+            }
+            .pickerStyle(.segmented)
+        }
+        .padding(Measures.Spacing.medium)
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: Measures.CornerRadius.xLarge)
+        )
+        .onChange(of: viewModel.selectedTheme) {
+            viewModel.didSwitchTheme(to: viewModel.selectedTheme)
+        }
+    }
+    
+    private var aboutRow: some View {
+        SettingsRow(title: "settings.aboutRow".localized) {
+            viewModel.didTapAboutRow()
+        }
+    }
+    
 }
 
 
