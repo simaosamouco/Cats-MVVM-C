@@ -59,17 +59,10 @@ extension Factory {
                 fatalError("Could not create ModelContainer: \(error)")
             }
         }
-        
-        /// ModelContext
-        registerLazy(ModelContext.self) {
-            let container = self.resolve(ModelContainer.self)
-            return ModelContext(container)
-        }
-        
-        /// Cat Repository
+ 
         registerLazy(SwiftDataRepositoryProtocol.self) {
-            let modelContext = self.resolve(ModelContext.self)
-            return SwiftDataRepository(modelContext: modelContext)
+            let container = self.resolve(ModelContainer.self)
+            return SwiftDataRepository(modelContainer: container)
         }
         
         /// CatsPersistanceUseCaseProtocol
