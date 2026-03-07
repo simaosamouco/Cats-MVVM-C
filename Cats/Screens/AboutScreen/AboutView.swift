@@ -13,60 +13,71 @@ struct AboutView<ViewModel: AboutViewModelProtocol>: View  {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: Measures.Spacing.regular) {
-                Text("about.title".localized)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.bottom, Measures.Spacing.tight)
-                
-                Text("about.subtitle".localized)
-                    .font(.title2)
-                    .foregroundColor(.secondary)
-                
-                Divider()
-                
-                Text("about.contentText.first".localizedMarkdown)
-                    .font(.system(size: Measures.Size.medium))
-                
-                Text("about.contentText.second".localizedMarkdown)
-                    .font(.system(size: Measures.Size.medium))
-                
-                Text("about.contentText.third".localizedMarkdown)
-                    .font(.system(size: Measures.Size.medium))
-                
-                Text("about.contentText.fourth".localizedMarkdown)
-                    .font(.system(size: Measures.Size.medium))
-                
-            }
-            .padding()
-            
-            VStack(alignment: .leading, spacing: .zero) {
-                Text("about.navigationBox.title".localized)
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-                    .padding()
-
-                VStack(spacing: Measures.Spacing.small) {
-                    SettingsRow(title: "Modal") { viewModel.didTapModalButton() }
-                    SettingsRow(title: "Modal full screen") { viewModel.didTapFullScreenModalButton() }
-                    SettingsRow(title: "Push") { viewModel.didTapPushButton() }
-                    SettingsRow(title: "Change Tab") { viewModel.didTapChangeTabButton() }
-                }
-                .padding(Measures.Spacing.small)
-                .shadow(
-                    color: .black.opacity(0.3),
-                    radius: Measures.CornerRadius.medium,
-                    x: 0,
-                    y: Measures.Spacing.compact
-                )
-            }
-            .background(
-                RoundedRectangle(cornerRadius: Measures.CornerRadius.xxLarge, style: .continuous)
-                    .fill(.ultraThinMaterial)
-            )
-            .padding()
-            
+            contentSection
+            navigationBox
         }
+    }
+    
+    // MARK: Subviews
+    
+    private var contentSection: some View {
+        VStack(alignment: .leading, spacing: Measures.Spacing.regular) {
+            Text("about.title".localized)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.bottom, Measures.Spacing.tight)
+            
+            Text("about.subtitle".localized)
+                .font(.title2)
+                .foregroundColor(.secondary)
+            
+            Divider()
+            
+            Text("about.contentText.first".localizedMarkdown)
+                .font(.system(size: Measures.Size.medium))
+            
+            Text("about.contentText.second".localizedMarkdown)
+                .font(.system(size: Measures.Size.medium))
+            
+            Text("about.contentText.third".localizedMarkdown)
+                .font(.system(size: Measures.Size.medium))
+            
+            Text("about.contentText.fourth".localizedMarkdown)
+                .font(.system(size: Measures.Size.medium))
+        }
+        .padding()
+    }
+    
+    private var navigationBox: some View {
+        VStack(alignment: .leading, spacing: .zero) {
+            Text("about.navigationBox.title".localized)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+                .padding()
+            
+            navigationRows
+        }
+        .background(
+            RoundedRectangle(cornerRadius: Measures.CornerRadius.xxLarge, style: .continuous)
+                .fill(.ultraThinMaterial)
+        )
+        .padding()
+    }
+    
+    private var navigationRows: some View {
+        VStack(spacing: Measures.Spacing.small) {
+            SettingsRow(title: "Modal") { viewModel.didTapModalButton() }
+            SettingsRow(title: "Modal full screen") { viewModel.didTapFullScreenModalButton() }
+            SettingsRow(title: "Push") { viewModel.didTapPushButton() }
+            SettingsRow(title: "Change Tab") { viewModel.didTapChangeTabButton() }
+        }
+        .padding(Measures.Spacing.small)
+        .shadow(
+            color: .black.opacity(0.3),
+            radius: Measures.CornerRadius.medium,
+            x: 0,
+            y: Measures.Spacing.compact
+        )
     }
     
 }
