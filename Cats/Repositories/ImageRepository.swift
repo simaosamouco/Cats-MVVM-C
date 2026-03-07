@@ -8,9 +8,14 @@
 import UIKit
 
 protocol ImageRepositoryProtocol {
+    /// Fetches an image from the given URL string, returning a cached version if available.
+    ///
+    /// - Parameter imageURL: The URL string of the image to fetch.
     func get(from imageURL: String) async throws -> UIImage
 }
 
+/// A concrete implementation of `ImageRepositoryProtocol` that fetches images over
+/// the network and caches them locally to avoid redundant requests.
 final class ImageRepository: ImageRepositoryProtocol {
     
     private let networkService: NetworkServiceProtocol
@@ -22,6 +27,9 @@ final class ImageRepository: ImageRepositoryProtocol {
         self.imageCache = imageCache
     }
     
+    /// This method first checks the local cache for an existing entry.
+    /// On a cache miss, it performs a network request, decodes the response into a `UIImage`,
+    /// stores the result in the cache, and returns it.
     func get(from imageURL: String) async throws -> UIImage {
         if let cachedImage = imageCache.retrieve(forKey: imageURL) {
             return cachedImage
