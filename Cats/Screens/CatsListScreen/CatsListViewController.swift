@@ -59,19 +59,3 @@ final class CatsListViewController: UIViewController {
         hostingController.didMove(toParent: self)
     }
 }
-
-//  SCREEN FACTORY METHOD:
-//
-//  func createCatsListViewController(navController: UINavigationController) -> CatsListViewController {
-//      let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
-//                                    argument: navController)
-//      let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-//      return CatsListViewController(
-//          viewModel: CatsListViewModel(
-//              coordinator: CatsListViewCoordinator(
-//                  factory: self,
-//                  coreCoordinator: coreCoordinator
-//              )
-//          )
-//      )
-//  }
