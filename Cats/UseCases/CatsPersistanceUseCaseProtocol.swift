@@ -28,7 +28,10 @@ final class CatsPersistanceUseCase: CatsPersistanceUseCaseProtocol {
         return swiftDataCats.compactMap { $0.toDomainModel() }
     }
     
-    func saveCat(id: String, url: String, breedName: String, breedDescription: String) async throws {
+    func saveCat(id: String,
+                 url: String,
+                 breedName: String,
+                 breedDescription: String) async throws {
         let cat = CatSwiftData(
             id: id,
             url: url,
@@ -38,7 +41,9 @@ final class CatsPersistanceUseCase: CatsPersistanceUseCaseProtocol {
         try await repository.insert(cat)
     }
     
-    func deleteCat(id: String, url: String, breedName: String) async throws {
+    func deleteCat(id: String,
+                   url: String,
+                   breedName: String) async throws {
         let predicate = #Predicate<CatSwiftData> { cat in
             cat.id == id
         }
