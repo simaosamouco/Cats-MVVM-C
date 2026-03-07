@@ -100,6 +100,7 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     func didShowCat(_ cat: CatCellViewModel) {
         guard searchText.isEmpty else { return }
         guard cat.id == publishedCats.last?.id else { return }
+        guard !isLoadingPagination else { return }
         getCats(for: .pagination)
     }
     
@@ -115,7 +116,9 @@ final class CatsListViewModel: CatsListViewModelProtocol {
                 return self.catFilterUseCase.filter(cats: self.catCellViewModels,
                                                     by: searchText)
             }
-            .assign(to: \.publishedCats, on: self)
+            .sink { [weak self] filtered in
+                self?.publishedCats = filtered
+            }
             .store(in: &cancellables)
     }
 
