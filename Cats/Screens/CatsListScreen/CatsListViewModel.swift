@@ -44,16 +44,16 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     
     /// ViewModel dependencies
     private let coordinator: CatsListCoordinatorProtocol
-    private let catsService: CatsServicesProtocol
+    private let getCatsUseCase: GetCatsUseCaseProtocol
     private let getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol
     private let catFilterUseCase: CatFilterUseCaseProtocol
     
     init(coordinator: CatsListCoordinatorProtocol,
-         catsService: CatsServicesProtocol,
+         getCatsUseCase: GetCatsUseCaseProtocol,
          getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol,
          catFilterUseCase: CatFilterUseCaseProtocol) {
         self.coordinator = coordinator
-        self.catsService = catsService
+        self.getCatsUseCase = getCatsUseCase
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
         self.catFilterUseCase = catFilterUseCase
         setupSearchBinding()
@@ -84,7 +84,7 @@ final class CatsListViewModel: CatsListViewModelProtocol {
             toggleLoading(for: type, to: true)
             defer { toggleLoading(for: type, to: false) }
             do {
-                let cats = try await catsService.getCats(page: catsPage)
+                let cats = try await getCatsUseCase.get(for: catsPage)
                 catsModels.append(contentsOf: cats)
                 updateCats(with: cats)
                 catsPage += 1

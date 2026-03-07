@@ -38,7 +38,7 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-        let catsServices = resolve(CatsServicesProtocol.self)
+        let getCatsUseCase = resolve(GetCatsUseCaseProtocol.self)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         let catFilterUseCase = resolve(CatFilterUseCaseProtocol.self)
         return CatsListViewController(
@@ -47,7 +47,7 @@ final class Factory: FactoryProtocol {
                     factory: self,
                     coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator
-                ), catsService: catsServices,
+                ), getCatsUseCase: getCatsUseCase,
                 getImageFromUrlUseCase: getImageUseCase,
                 catFilterUseCase: catFilterUseCase
             )

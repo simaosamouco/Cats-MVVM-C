@@ -41,6 +41,16 @@ extension Factory {
             return ImageRepository(networkService: networkService,
                                    imageCache: imageCache)
         }
+        
+        registerLazy(CatsRepositoryProtocol.self) {
+            let catsService = self.resolve(CatsServicesProtocol.self)
+            return CatsRepository(catsService: catsService)
+        }
+        
+        registerLazy(GetCatsUseCaseProtocol.self) {
+            let catsRepository = self.resolve(CatsRepositoryProtocol.self)
+            return GetCatsUseCase(repository: catsRepository)
+        }
 
         /// GetImageFromUrlUseCaseProtocol
         registerLazy(GetImageFromUrlUseCaseProtocol.self) {
