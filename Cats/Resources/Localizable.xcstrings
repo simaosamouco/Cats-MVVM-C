@@ -263,6 +263,23 @@
         }
       }
     },
+    "errors.invalidImageData" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid image data."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dados de imagem inválidos."
+          }
+        }
+      }
+    },
     "errors.invalidURL" : {
       "extractionState" : "manual",
       "localizations" : {
