@@ -77,7 +77,6 @@ final class Factory: FactoryProtocol {
                                      cat: CatProfileModel) -> ProfileViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
-        let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
         let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         return ProfileViewController(
@@ -85,8 +84,7 @@ final class Factory: FactoryProtocol {
                 catProfile: cat,
                 coordinator: ProfileViewCoordinator(
                     factory: self,
-                    coreCoordinator: coreCoordinator,
-                    tabBarCoordinator: tabBarCoordinator
+                    coreCoordinator: coreCoordinator
                 ),
                 catsPersistanceUseCase: catsPersistanceUseCase,
                 getImageFromUrlUseCase: getImageUseCase
@@ -97,14 +95,12 @@ final class Factory: FactoryProtocol {
     func createSettingsViewController(navController: UINavigationController) -> SettingsViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
-        let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
         let appThemeUseCase = resolve(AppThemeUseCaseProtocol.self)
         return SettingsViewController(
             viewModel: SettingsViewModel(
                 coordinator: SettingsCoordinator(
                     factory: self,
-                    coreCoordinator: coreCoordinator,
-                    tabBarCoordinator: tabBarCoordinator
+                    coreCoordinator: coreCoordinator
                 ),
                 appThemeUseCase: appThemeUseCase
             )

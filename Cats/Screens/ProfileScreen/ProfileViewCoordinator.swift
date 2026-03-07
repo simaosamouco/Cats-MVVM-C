@@ -14,15 +14,12 @@ protocol ProfileViewCoordinatorProtocol  {
 final class ProfileViewCoordinator: ProfileViewCoordinatorProtocol {
     
     private let factory: FactoryProtocol
-    private let tabBarCoordinator: TabBarCoordinatorProtocol
     private let coreCoordinator: CoreCoordinatorProtocol
     
     init(factory: FactoryProtocol,
-         coreCoordinator: CoreCoordinatorProtocol,
-         tabBarCoordinator: TabBarCoordinatorProtocol) {
+         coreCoordinator: CoreCoordinatorProtocol) {
         self.factory = factory
         self.coreCoordinator = coreCoordinator
-        self.tabBarCoordinator = tabBarCoordinator
     }
     
     func showError(_ error: Error) {

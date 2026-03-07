@@ -46,19 +46,3 @@ final class AboutViewController: UIViewController {
     }
     
 }
-
-//  SCREEN FACTORY METHOD:
-//
-//  func createAboutViewController(navController: UINavigationController) -> AboutViewController {
-//      let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
-//                                    argument: navController)
-//      let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-//      return AboutViewController(
-//          viewModel: AboutViewModel(
-//              coordinator: AboutViewCoordinator(
-//                  factory: self,
-//                  coreCoordinator: coreCoordinator
-//              )
-//          )
-//      )
-//  }

@@ -18,7 +18,7 @@ protocol CatsListCoordinatorProtocol {
 final class CatsListCoordinator: CatsListCoordinatorProtocol {
     
     private let factory: FactoryProtocol
-    private let tabBarCoordinator: TabBarCoordinatorProtocol
+    private weak var tabBarCoordinator: TabBarCoordinatorProtocol?
     private let coreCoordinator: CoreCoordinatorProtocol
     
     init(factory: FactoryProtocol,
@@ -42,7 +42,7 @@ final class CatsListCoordinator: CatsListCoordinatorProtocol {
     }
     
     func changeTab(to screen: TabBarScreen) {
-        tabBarCoordinator.changeTab(to: screen)
+        tabBarCoordinator?.changeTab(to: screen)
     }
     
 }

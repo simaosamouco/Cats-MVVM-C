@@ -16,7 +16,7 @@ protocol SavedCatsCoordinatorProtocol {
 final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol {
     
     private let factory: FactoryProtocol
-    private let tabBarCoordinator: TabBarCoordinatorProtocol
+    private weak var tabBarCoordinator: TabBarCoordinatorProtocol?
     private let coreCoordinator: CoreCoordinatorProtocol
     
     init(factory: FactoryProtocol,
@@ -28,7 +28,7 @@ final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol {
     }
     
     func changeTab(to screen: TabBarScreen) {
-        tabBarCoordinator.changeTab(to: screen)
+        tabBarCoordinator?.changeTab(to: screen)
     }
 
     func showError(_ error: Error) {

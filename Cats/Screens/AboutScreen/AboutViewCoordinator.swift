@@ -18,7 +18,7 @@ final class AboutViewCoordinator: AboutViewCoordinatorProtocol {
     
     private let factory: FactoryProtocol
     private let coreCoordinator: CoreCoordinatorProtocol
-    private let tabBarCoordinator: TabBarCoordinatorProtocol
+    private weak var tabBarCoordinator: TabBarCoordinatorProtocol?
     
     init(factory: FactoryProtocol,
          coreCoordinator: CoreCoordinatorProtocol,
@@ -53,7 +53,7 @@ final class AboutViewCoordinator: AboutViewCoordinatorProtocol {
     }
     
     func changeTab() {
-        tabBarCoordinator.changeTab(to: .catsList)
+        tabBarCoordinator?.changeTab(to: .catsList)
     }
     
 }
