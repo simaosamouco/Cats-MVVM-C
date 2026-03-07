@@ -30,13 +30,21 @@ protocol ImageCacheProtocol {
 final class ImageCache: ImageCacheProtocol {
     
     private let cache: NSCache<NSString, UIImage>
+    /// This represents the max cost to cache
+    /// After the amount of MB set in this var is reached the cache will release older entries
+    private let totalCostLimit = 500 * 1024 * 1024 // 500MB
     
     init() {
         self.cache = NSCache<NSString, UIImage>()
+        self.cache.totalCostLimit = totalCostLimit
     }
     
     func store(_ image: UIImage, forKey key: String) {
-        cache.setObject(image, forKey: NSString(string: key))
+        cache.setObject(
+            image,
+            forKey: NSString(string: key),
+            cost: image.estimatedByteSize
+        )
     }
     
     func retrieve(forKey key: String) -> UIImage? {
