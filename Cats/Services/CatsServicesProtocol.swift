@@ -25,7 +25,7 @@ final class CatsServices: CatsServicesProtocol {
     /// The network service used for fetching data.
     let networkService: NetworkServiceProtocol
     
-    private let decoder = JSONDecoder()
+    private lazy var decoder = JSONDecoder()
     
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
