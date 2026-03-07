@@ -28,18 +28,18 @@ final class ImageRepository: ImageRepositoryProtocol {
         }
         
         guard let url = URL(string: imageURL) else {
-            throw CatsErros.invalidURL
+            throw CatsError.invalidURL
         }
         
         do {
             let imageData = try await networkService.fetchData(from: url)
             guard let image = UIImage(data: imageData) else {
-                throw CatsErros.invalidImageData
+                throw CatsError.invalidImageData
             }
             imageCache.store(image, forKey: imageURL)
             return image
         } catch {
-            throw CatsErros.fecthingDataFailed
+            throw CatsError.fetchingDataFailed
         }
     }
 

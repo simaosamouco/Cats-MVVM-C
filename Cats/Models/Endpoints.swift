@@ -45,7 +45,7 @@ enum Endpoints {
         }
 
         guard let url = components.url else {
-            throw CatsErros.invalidURL
+            throw CatsError.invalidURL
         }
 
         return url

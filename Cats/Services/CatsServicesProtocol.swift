@@ -47,7 +47,7 @@ final class CatsServices: CatsServicesProtocol {
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw CatsErros.decodingFailed
+            throw CatsError.decodingFailed
         }
     }
     

@@ -28,7 +28,7 @@ final class NetworkService: NetworkServiceProtocol {
             let (data, _) = try await URLSession.shared.data(from: url)
             return data
         } catch {
-            throw CatsErros.fecthingDataFailed
+            throw CatsError.fetchingDataFailed
         }
     }
     

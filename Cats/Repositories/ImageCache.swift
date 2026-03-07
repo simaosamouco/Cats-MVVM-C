@@ -5,12 +5,6 @@
 //  Created by Simão Neves Samouco on 24/11/2025.
 //
 
-
-//
-//  InMemoryImageCache.swift
-//  Cats
-//
-
 import UIKit
 
 protocol ImageCacheProtocol {

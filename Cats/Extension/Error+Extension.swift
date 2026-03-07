@@ -15,7 +15,7 @@ extension Error {
     /// conforms to `CatsErros` and provides an `errorDescription`, that description
     /// is used. Otherwise, it falls back to the standard `localizedDescription`.
     var displayMessage: String {
-        (self as? CatsErros)?.errorDescription ?? self.localizedDescription
+        (self as? CatsError)?.errorDescription ?? self.localizedDescription
     }
     
 }

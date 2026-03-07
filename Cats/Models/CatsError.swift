@@ -6,14 +6,14 @@
 //
 
 /// Represents possible errors throughout the app.
-enum CatsErros: Error {
+enum CatsError: Error {
     
     /// Indicates a malformed or invalid URL was constructed.
     case invalidURL
     /// Indicates decoding of the received data failed.
     case decodingFailed
     /// Indicates a network or data fetching failure occurred.
-    case fecthingDataFailed
+    case fetchingDataFailed
     // TODO: add documentation here
     case invalidImageData
     
@@ -24,11 +24,10 @@ enum CatsErros: Error {
             return "errors.invalidURL".localized
         case .decodingFailed:
             return "errors.decodingFailed".localized
-        case .fecthingDataFailed:
+        case .fetchingDataFailed:
             return "errors.fetchingDataFailed".localized
         case .invalidImageData:
-            // TODO: Add string for this case
-            return "errors.fetchingDataFailed".localized
+            return "errors.invalidImageData".localized
         }
     }
     
