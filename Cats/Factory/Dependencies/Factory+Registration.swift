@@ -70,14 +70,14 @@ extension Factory {
             }
         }
  
-        registerLazy(SwiftDataRepositoryProtocol.self) {
+        registerLazy(PersistenceStoreProtocol.self) {
             let container = self.resolve(ModelContainer.self)
-            return SwiftDataRepository(modelContainer: container)
+            return PersistenceStore(modelContainer: container)
         }
         
         /// CatsPersistanceUseCaseProtocol
         registerLazy(CatsPersistanceUseCaseProtocol.self) {
-            let repository = self.resolve(SwiftDataRepositoryProtocol.self)
+            let repository = self.resolve(PersistenceStoreProtocol.self)
             return CatsPersistanceUseCase(repository: repository)
         }
 

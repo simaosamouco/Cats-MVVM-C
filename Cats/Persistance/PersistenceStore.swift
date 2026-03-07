@@ -1,5 +1,5 @@
 //
-//  SwiftDataRepositoryProtocol.swift
+//  PersistenceStore.swift
 //  Cats
 //
 //  Created by Simão Neves Samouco on 11/09/2025.
@@ -9,7 +9,7 @@
 import SwiftData
 import Foundation
 
-protocol SwiftDataRepositoryProtocol {
+protocol PersistenceStoreProtocol {
 
     /// Fetches all persisted entities of the inferred type.
     /// - Returns: An array of all stored entities. Empty array if none exist.
@@ -57,7 +57,7 @@ protocol SwiftDataRepositoryProtocol {
 /// no concurrent access to the underlying `ModelContext`.
 
 @ModelActor
-actor SwiftDataRepository: SwiftDataRepositoryProtocol {
+actor PersistenceStore: PersistenceStoreProtocol {
     
     func fetch<Entity: PersistentModel>() throws -> [Entity] {
         let descriptor = FetchDescriptor<Entity>()

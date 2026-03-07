@@ -17,9 +17,9 @@ protocol CatsPersistanceUseCaseProtocol {
 
 final class CatsPersistanceUseCase: CatsPersistanceUseCaseProtocol {
     
-    private let repository: SwiftDataRepositoryProtocol
+    private let repository: PersistenceStoreProtocol
     
-    init(repository: SwiftDataRepositoryProtocol) {
+    init(repository: PersistenceStoreProtocol) {
         self.repository = repository
     }
     
