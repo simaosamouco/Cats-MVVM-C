@@ -5,10 +5,13 @@
 //  Created by Simão Neves Samouco on 07/03/2026.
 //
 
-import Foundation
-
+/// This protocol intentionally adds no new requirements. Its purpose is to allow
+/// the dependency injection container to distinguish between multiple concrete
+/// implementations of `CatsRepositoryProtocol`
 protocol RemoteCatsRepositoryProtocol: CatsRepositoryProtocol { }
 
+/// A concrete implementation of `LocalCatsRepositoryProtocol` that fetches cats
+/// from the API via a `CatsServicesProtocol`.
 final class RemoteCatsRepository: RemoteCatsRepositoryProtocol {
     
     private var catsService: CatsServicesProtocol
