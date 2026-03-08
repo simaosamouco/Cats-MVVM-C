@@ -17,14 +17,14 @@ protocol CatsPersistanceUseCaseProtocol {
 
 final class CatsPersistanceUseCase: CatsPersistanceUseCaseProtocol {
     
-    private let repository: PersistenceStoreProtocol
+    private let store: PersistenceStoreProtocol
     
-    init(repository: PersistenceStoreProtocol) {
-        self.repository = repository
+    init(store: PersistenceStoreProtocol) {
+        self.store = store
     }
     
     func fetchCats() async throws -> [Cat] {
-        let swiftDataCats: [CatSwiftData] = try await repository.fetch()
+        let swiftDataCats: [CatSwiftData] = try await store.fetch()
         return swiftDataCats.compactMap { $0.toDomainModel() }
     }
     
@@ -38,7 +38,7 @@ final class CatsPersistanceUseCase: CatsPersistanceUseCaseProtocol {
             breedName: breedName,
             breedDescription: breedDescription
         )
-        try await repository.insert(cat)
+        try await store.insert(cat)
     }
     
     func deleteCat(id: String,
@@ -47,14 +47,14 @@ final class CatsPersistanceUseCase: CatsPersistanceUseCaseProtocol {
         let predicate = #Predicate<CatSwiftData> { cat in
             cat.id == id
         }
-        try await repository.delete(predicate: predicate)
+        try await store.delete(predicate: predicate)
     }
     
     func isCatSaved(id: String) async throws -> Bool {
         let predicate = #Predicate<CatSwiftData> { cat in
             cat.id == id
         }
-        return try await repository.exists(predicate: predicate)
+        return try await store.exists(predicate: predicate)
     }
     
 }
