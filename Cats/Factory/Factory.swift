@@ -38,8 +38,9 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-        let getCatsUseCase = resolve(GetCatsUseCaseProtocol.self)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
+        let catRepository = resolve(RemoteCatsRepositoryProtocol.self)
+        let getCatsUseCase = GetCatsUseCase(repository: catRepository)
         let catFilterUseCase = resolve(CatFilterUseCaseProtocol.self)
         return CatsListViewController(
             viewModel: CatsListViewModel(
@@ -58,7 +59,8 @@ final class Factory: FactoryProtocol {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
-        let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
+        let catRepository = resolve(LocalCatsRepositoryProtocol.self)
+        let getCatsUseCase = GetCatsUseCase(repository: catRepository)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         return SavedCatsViewController(
             viewModel: SavedCatsViewModel(
@@ -67,7 +69,7 @@ final class Factory: FactoryProtocol {
                     coreCoordinator: coreCoordinator,
                     tabBarCoordinator: tabBarCoordinator
                 ),
-                catsPersistanceUseCase: catsPersistanceUseCase,
+                getCatsUseCase: getCatsUseCase,
                 getImageFromUrlUseCase: getImageUseCase
             )
         )

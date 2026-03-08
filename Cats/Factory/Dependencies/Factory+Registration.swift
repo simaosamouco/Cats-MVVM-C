@@ -42,14 +42,19 @@ extension Factory {
                                    imageCache: imageCache)
         }
         
-        registerLazy(CatsRepositoryProtocol.self) {
+        registerLazy(PersistenceStoreProtocol.self) {
+            let container = self.resolve(ModelContainer.self)
+            return PersistenceStore(modelContainer: container)
+        }
+
+        registerLazy(RemoteCatsRepositoryProtocol.self) {
             let catsService = self.resolve(CatsServicesProtocol.self)
-            return CatsRepository(catsService: catsService)
+            return RemoteCatsRepository(catsService: catsService)
         }
         
-        registerLazy(GetCatsUseCaseProtocol.self) {
-            let catsRepository = self.resolve(CatsRepositoryProtocol.self)
-            return GetCatsUseCase(repository: catsRepository)
+        registerLazy(LocalCatsRepositoryProtocol.self) {
+            let persistenceStore = self.resolve(PersistenceStoreProtocol.self)
+            return LocalCatsRepository(store: persistenceStore)
         }
 
         /// GetImageFromUrlUseCaseProtocol
@@ -69,16 +74,11 @@ extension Factory {
                 fatalError("Could not create ModelContainer: \(error)")
             }
         }
- 
-        registerLazy(PersistenceStoreProtocol.self) {
-            let container = self.resolve(ModelContainer.self)
-            return PersistenceStore(modelContainer: container)
-        }
-        
+
         /// CatsPersistanceUseCaseProtocol
         registerLazy(CatsPersistanceUseCaseProtocol.self) {
-            let repository = self.resolve(PersistenceStoreProtocol.self)
-            return CatsPersistanceUseCase(repository: repository)
+            let store = self.resolve(PersistenceStoreProtocol.self)
+            return CatsPersistanceUseCase(store: store)
         }
 
         /// CoreCoordinatorProtocol (factory with argument)

@@ -25,14 +25,14 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
     
     /// ViewModel Dependencies
     private let coordinator: SavedCatsCoordinatorProtocol
-    private let catsPersistanceUseCase: CatsPersistanceUseCaseProtocol
+    private let getCatsUseCase: GetCatsUseCaseProtocol
     private let getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol
     
     init(coordinator: SavedCatsCoordinatorProtocol,
-         catsPersistanceUseCase: CatsPersistanceUseCaseProtocol,
+         getCatsUseCase: GetCatsUseCaseProtocol,
          getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol) {
         self.coordinator = coordinator
-        self.catsPersistanceUseCase = catsPersistanceUseCase
+        self.getCatsUseCase = getCatsUseCase
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
     }
     
@@ -42,7 +42,7 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
             toggleLoading(to: true)
             defer { toggleLoading(to: false) }
             do {
-                let savedCats = try await catsPersistanceUseCase.fetchCats()
+                let savedCats = try await getCatsUseCase.get(for: 1)
                 self.catsModels = savedCats
                 let catCellViewModels = createViewModels(from: savedCats)
                 Task { @MainActor in
