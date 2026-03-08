@@ -7,14 +7,9 @@
 
 /// Defines app appearance themes and maps them to iOS interface styles.
 
-import Foundation
+import UIKit
 
 /// Represents the app's selectable appearance themes.
-///
-/// The `value` of each case matches the corresponding native `UIUserInterfaceStyle` raw value:
-///   - system = 0 (`.unspecified`)
-///   - light = 1 (`.light`)
-///   - dark = 2 (`.dark`)
 /// This mapping ensures seamless integration with UIKit's style system.
 enum Theme: String, CaseIterable, Codable {
     
@@ -34,13 +29,17 @@ enum Theme: String, CaseIterable, Codable {
         }
     }
     
-    /// The integer value corresponding to `UIUserInterfaceStyle` (`.unspecified`, `.light`, `.dark`).
-    /// Used for bridging with UIKit APIs and persistence.
+    /// The corresponding `UIUserInterfaceStyle` raw value for this theme.
+    ///
+    /// Maps each case to its `UIKit` equivalent:
+    /// - `.light` → `UIUserInterfaceStyle.light`
+    /// - `.dark` → `UIUserInterfaceStyle.dark`
+    /// - `.system` → `UIUserInterfaceStyle.unspecified`
     var value: Int {
         switch self {
-        case .light: return 1
-        case .dark: return 2
-        case .system: return 0
+        case .light: return UIUserInterfaceStyle.light.rawValue
+        case .dark: return UIUserInterfaceStyle.dark.rawValue
+        case .system: return UIUserInterfaceStyle.unspecified.rawValue
         }
     }
     
