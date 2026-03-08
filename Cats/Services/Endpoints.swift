@@ -21,7 +21,9 @@ enum Endpoints {
     case getCats(page: Int, limit: Int = 15, hasBreeds: Bool = true, order: String = "rand")
     
     /// The API key used for authenticating requests to The Cat API.
-    private static let apiKey = "live_CFqvQ8IV7zHUZxSAUP6AzMcf8SfewdEGgWLqoI1OlyxfOY4j8i2SHBruM23sOgLU"
+    private static var apiKey: String {
+        Bundle.main.infoDictionary?["CAT_API_KEY"] as? String ?? ""
+    }
 
     /// Constructs the URL for the given endpoint case.
     /// - Returns: A fully formed URL for the endpoint.
@@ -52,4 +54,4 @@ enum Endpoints {
     }
     
 }
-// Example endpoint: https://api.thecatapi.com/v1/images/search?limit=10&page=0&has_breeds=1&order=rand&api_key=live_CFqvQ8IV7zHUZxSAUP6AzMcf8SfewdEGgWLqoI1OlyxfOY4j8i2SHBruM23sOgLU
+// Example endpoint: https://api.thecatapi.com/v1/images/search?limit=10&page=0&has_breeds=1&order=rand&api_key=apiKey

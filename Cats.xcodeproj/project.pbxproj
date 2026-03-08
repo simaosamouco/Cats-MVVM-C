@@ -24,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C3073F1A2F5DFAD2005729ED /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		C33B4F9A2E756E29005472C0 /* Cats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33B4FB02E756E2B005472C0 /* CatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33B4FBA2E756E2B005472C0 /* CatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,6 +285,7 @@
 /* Begin XCBuildConfiguration section */
 		C33B4FC42E756E2B005472C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3073F1A2F5DFAD2005729ED /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +313,7 @@
 		};
 		C33B4FC52E756E2B005472C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3073F1A2F5DFAD2005729ED /* Secret.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,6 +341,7 @@
 		};
 		C33B4FC62E756E2B005472C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3073F1A2F5DFAD2005729ED /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -402,6 +406,7 @@
 		};
 		C33B4FC72E756E2B005472C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3073F1A2F5DFAD2005729ED /* Secret.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
