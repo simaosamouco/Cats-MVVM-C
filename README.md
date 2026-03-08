@@ -14,6 +14,11 @@ https://github.com/user-attachments/assets/d10c7764-b00f-42ae-83c2-13274bd19997
 
 <br>
 
+## System Design
+<img width="5504" height="5392" alt="image" src="https://github.com/user-attachments/assets/07d9a0d7-e602-4fe2-bb9b-3eb5160f8c46" />
+
+
+
 ## ⚙️ How it works
 
 By following the MVVM architecture, all of the logic around a certain screen is contained in the View Model, making the View as "dumb" as possible. This could have been implemented in a more literal way if the view model provided all of the text and images to the view. For a simple project like this it felt unnecessary.
