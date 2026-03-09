@@ -9,6 +9,12 @@
 
 import Foundation
 
+enum Order: String {
+    case random = "rand"
+    case ascendng = "asc"
+    case descending = "desc"
+}
+
 /// Enum representing API endpoints for The Cat API.
 enum Endpoints {
     
@@ -18,7 +24,10 @@ enum Endpoints {
     ///   - limit: The maximum number of results per page (default: 15).
     ///   - hasBreeds: If true, only results with breed information are included (default: true).
     ///   - order: The sort order for results, such as 'rand' for random (default: 'rand').
-    case getCats(page: Int, limit: Int = 15, hasBreeds: Bool = true, order: String = "rand")
+    case getCats(page: Int,
+                 limit: Int = 15,
+                 hasBreeds: Bool = true,
+                 order: Order = .random)
     
     /// The API key used for authenticating requests to The Cat API.
     private static var apiKey: String {
@@ -41,7 +50,7 @@ enum Endpoints {
                 URLQueryItem(name: "limit", value: "\(limit)"),
                 URLQueryItem(name: "page", value: "\(page)"),
                 URLQueryItem(name: "has_breeds", value: hasBreeds ? "1" : "0"),
-                URLQueryItem(name: "order", value: order),
+                URLQueryItem(name: "order", value: order.rawValue),
                 URLQueryItem(name: "api_key", value: Endpoints.apiKey)
             ]
         }
