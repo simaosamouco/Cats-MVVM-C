@@ -14,7 +14,7 @@ protocol RemoteCatsRepositoryProtocol: CatsRepositoryProtocol { }
 /// from the API via a `CatsServicesProtocol`.
 final class RemoteCatsRepository: RemoteCatsRepositoryProtocol {
     
-    private var catsService: CatsServicesProtocol
+    private let catsService: CatsServicesProtocol
     
     init(catsService: CatsServicesProtocol) {
         self.catsService = catsService

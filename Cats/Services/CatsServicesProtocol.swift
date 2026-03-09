@@ -23,7 +23,7 @@ protocol CatsServicesProtocol {
 final class CatsServices: CatsServicesProtocol {
     
     /// The network service used for fetching data.
-    let networkService: NetworkServiceProtocol
+    private let networkService: NetworkServiceProtocol
     
     private lazy var decoder = JSONDecoder()
     
