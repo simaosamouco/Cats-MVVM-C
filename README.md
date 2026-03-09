@@ -27,6 +27,13 @@ Although the View Model is the "brain" of the screen, it does not actually perfo
 
 This is possible via **dependency injection**; throughout the app, dependencies are injected where needed to follow the single responsibility principle. By following this design pattern, the view model is relieved of the filtering responsibility, and the use case can be injected somewhere else, preventing the need to write the same code twice. Once the use case is tested, it can be used elsewhere safely.
 
+## 📚 Libraries
+Early in the project I made the decision to not use any third-party libraries. I wanted the challenge of implementing the project using just native components. 
+
+There are some great libraries that could have helped, like Swinject for dependency injection and Kingfisher for image caching.
+
+Doing things natively on small projects like this helps me understand what goes on "behind the scenes" — something I would not get if I just delegated that work to a third-party library. That's the main reason I wanted to do things myself.
+
 ## 🧭 Navigation
 
 To simplify and centralize the navigation within the app, the **Coordinator design pattern** was used. This relieves the view model of this responsibility. The way it works is: the user taps a button on the view which then tells "hey view model! This button was tapped!" The view model, being the brain, will then decide what to do with that information "that means we should navigate to that screen, hey coordinator: go here!" The coordinator then simply goes where the view model tells it to go—it does not decide anything.
