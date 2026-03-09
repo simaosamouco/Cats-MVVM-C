@@ -24,6 +24,7 @@ protocol FactoryProtocol: AnyObject {
 final class Factory: FactoryProtocol {
     
     var dependencies: [String: Any] = [:]
+    let lock = NSLock()
     
     init() {
         registerDependencies()

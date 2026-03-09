@@ -69,46 +69,58 @@ extension Factory: DependencyInjectionProtocol {
     /// Registers a type with lazy initialization using a factory closure.
     func registerLazy<T>(_ type: T.Type, factory: @escaping () -> T) {
         let key = String(describing: type)
-        dependencies[key] = Lazy(factory: factory)
+        lock.withLock {
+            dependencies[key] = Lazy(factory: factory)
+        }
     }
 
     /// Registers a type with immediate initialization using an autoclosure.
     /// Note: The instance is created immediately when this method is called.
     func register<T>(_ type: T.Type, instance: @escaping @autoclosure () -> T) {
         let key = String(describing: type)
-        dependencies[key] = Lazy(factory: instance)
+        lock.withLock {
+            dependencies[key] = Lazy(factory: instance)
+        }
     }
-    
+
     /// Registers a type with a factory.
     /// The factory is stored directly and called each time resolve is called.
     func registerFactory<T>(_ type: T.Type, factory: @escaping () -> T) {
         let key = String(describing: type)
-        dependencies[key] = factory
+        lock.withLock {
+            dependencies[key] = factory
+        }
     }
 
     /// Registers a type with a factory that requires an argument.
     /// The factory is stored directly and called each time resolve is called.
     func registerFactory<T, Arg>(_ type: T.Type, factory: @escaping (Arg) -> T) {
         let key = String(describing: type)
-        dependencies[key] = factory
+        lock.withLock {
+            dependencies[key] = factory
+        }
     }
 
     /// Resolves a dependency by type, handling different storage strategies.
     func resolve<T>(_ type: T.Type) -> T {
+        
         let key = String(describing: type)
+        
+        // Only hold the lock long enough to grab the entry — not instantiation
+        let entry = lock.withLock { dependencies[key] }
 
         // Try lazy wrapper first (for factory-registered dependencies)
-        if let lazy = dependencies[key] as? Lazy<T> {
+        if let lazy = entry as? Lazy<T> {
             return lazy.instance
         }
 
         // Try direct instance (for pre-created objects)
-        if let service = dependencies[key] as? T {
+        if let service = entry as? T {
             return service
         }
-        
+
         // Try direct factory closure (for fresh instances each time)
-        if let factory = dependencies[key] as? () -> T {
+        if let factory = entry as? () -> T {
             return factory()
         }
 
@@ -119,11 +131,12 @@ extension Factory: DependencyInjectionProtocol {
     func resolve<T, Arg>(_ type: T.Type, argument: Arg) -> T {
         let key = String(describing: type)
 
-        if let factory = dependencies[key] as? (Arg) -> T {
+        let entry = lock.withLock { dependencies[key] }
+
+        if let factory = entry as? (Arg) -> T {
             return factory(argument)
         }
 
         fatalError("Could not resolve dependency with argument for type \(type). Make sure it's registered with an argument factory.")
     }
-    
 }
