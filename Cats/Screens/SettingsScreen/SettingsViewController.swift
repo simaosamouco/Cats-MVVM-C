@@ -5,7 +5,6 @@
 //  Created by Simão Neves Samouco on 28/08/2025.
 //
 
-import UIKit
 import SwiftUI
 
 class SettingsViewController<Content: View>: ThemeHostingController<Content> {

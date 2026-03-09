@@ -5,7 +5,6 @@
 //  Created by Simão Neves Samouco on 01/09/2025.
 //
 
-import UIKit
 import SwiftUI
 
 final class TestViewController<Content: View>: ThemeHostingController<Content> {

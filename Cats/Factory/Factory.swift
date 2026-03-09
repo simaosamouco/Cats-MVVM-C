@@ -10,14 +10,14 @@ import UIKit
 protocol FactoryProtocol: AnyObject {
     
     func createTabBarController() -> MainTabBarController
-    func createCatsListController(navController: UINavigationController) -> CatsListViewController<CatsListView<CatsListViewModel>>
-    func createSavedCatsViewController(navController: UINavigationController) -> SavedCatsViewController<SavedCatsView<SavedCatsViewModel>>
+    func createCatsListController(navController: UINavigationController) -> UIViewController
+    func createSavedCatsViewController(navController: UINavigationController) -> UIViewController
     func createProfileViewController(navController: UINavigationController,
-                                     cat: CatProfileModel) -> ProfileViewController<ProfileView<ProfileViewModel>>
-    func createSettingsViewController(navController: UINavigationController) -> SettingsViewController<SettingsView<SettingsViewModel>>
-    func createAboutViewController(navController: UINavigationController) -> AboutViewController<AboutView<AboutViewModel>>
+                                     cat: CatProfileModel) -> UIViewController
+    func createSettingsViewController(navController: UINavigationController) -> UIViewController
+    func createAboutViewController(navController: UINavigationController) -> UIViewController
     func createTestViewController(navController: UINavigationController,
-                                  isModallyPresented: Bool) -> TestViewController<TestView<TestViewModel>>
+                                  isModallyPresented: Bool) -> UIViewController
     
 }
 
@@ -36,7 +36,7 @@ final class Factory: FactoryProtocol {
         return tabCoor
     }
     
-    func createCatsListController(navController: UINavigationController) -> CatsListViewController<CatsListView<CatsListViewModel>> {
+    func createCatsListController(navController: UINavigationController) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
@@ -60,7 +60,7 @@ final class Factory: FactoryProtocol {
         )
     }
     
-    func createSavedCatsViewController(navController: UINavigationController) -> SavedCatsViewController<SavedCatsView<SavedCatsViewModel>> {
+    func createSavedCatsViewController(navController: UINavigationController) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
@@ -84,7 +84,7 @@ final class Factory: FactoryProtocol {
     }
     
     func createProfileViewController(navController: UINavigationController,
-                                     cat: CatProfileModel) -> ProfileViewController<ProfileView<ProfileViewModel>> {
+                                     cat: CatProfileModel) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
@@ -105,7 +105,7 @@ final class Factory: FactoryProtocol {
         )
     }
     
-    func createSettingsViewController(navController: UINavigationController) -> SettingsViewController<SettingsView<SettingsViewModel>> {
+    func createSettingsViewController(navController: UINavigationController) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let appThemeUseCase = resolve(AppThemeUseCaseProtocol.self)
@@ -123,7 +123,7 @@ final class Factory: FactoryProtocol {
         )
     }
     
-    func createAboutViewController(navController: UINavigationController) -> AboutViewController<AboutView<AboutViewModel>> {
+    func createAboutViewController(navController: UINavigationController) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let tabBarCoordinator = resolve(TabBarCoordinatorProtocol.self)
@@ -142,7 +142,7 @@ final class Factory: FactoryProtocol {
     }
     
     func createTestViewController(navController: UINavigationController,
-                                  isModallyPresented: Bool) -> TestViewController<TestView<TestViewModel>> {
+                                  isModallyPresented: Bool) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
         let viewModel = TestViewModel(

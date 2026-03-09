@@ -5,7 +5,6 @@
 //  Created by Simão Neves Samouco on 19/09/2025.
 //
 
-import UIKit
 import SwiftUI
 
 final class SavedCatsViewController<Content: View>: ThemeHostingController<Content>  {
