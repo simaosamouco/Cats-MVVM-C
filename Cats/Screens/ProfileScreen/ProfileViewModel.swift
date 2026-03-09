@@ -5,14 +5,13 @@
 //  Created by Simão Neves Samouco on 08/08/2025.
 //
 
-import UIKit
+import SwiftUI
 
 protocol ProfileViewModelProtocol: ObservableObject {
     var image: UIImage? { get }
     var breedName: String { get }
     var breedDescription: String { get }
-    
-    var isCatSavedPublisher: Published<Bool>.Publisher { get }
+    var toolBarImage: Image { get }
     
     func didTapSaveButton()
     func checkCatSavedStatus()
@@ -22,9 +21,11 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     
     @Published var image: UIImage?
     @Published var isCatSaved: Bool = false
-    var isCatSavedPublisher: Published<Bool>.Publisher { $isCatSaved }
     let breedName: String
     let breedDescription: String
+    var toolBarImage: Image {
+        isCatSaved ? Image(systemName: "bookmark.fill") : Image(systemName: "bookmark")
+    }
     
     /// Internal State vars
     private let cat: CatProfileModel

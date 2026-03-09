@@ -46,6 +46,7 @@ struct SavedCatsView<ViewModel: SavedCatsViewModelProtocol>: View  {
         .onAppear {
             viewModel.getSavedCats()
         }
+        .navigationTitle("savedCats.title".localized)
     }
     
     // MARK: Subviews

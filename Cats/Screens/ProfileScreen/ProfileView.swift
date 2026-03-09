@@ -27,6 +27,12 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
         .onChange(of: viewModel.image) { _, newImage in
             handleImageChange(newImage)
         }
+        .toolbar {
+            saveButton
+        }
+        .onAppear {
+            viewModel.checkCatSavedStatus()
+        }
     }
     
     @ViewBuilder
@@ -61,6 +67,16 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
     
     private func handleImageChange(_ newImage: UIImage?) {
         showContent = (newImage != nil)
+    }
+    
+    private var saveButton: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                viewModel.didTapSaveButton()
+            } label: {
+                viewModel.toolBarImage
+            }
+        }
     }
 
 }

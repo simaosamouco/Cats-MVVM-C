@@ -34,9 +34,9 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea()
             bookMarkButton
         }
+        .navigationTitle("catsList.title".localized)
     }
     
     // MARK: Subviews

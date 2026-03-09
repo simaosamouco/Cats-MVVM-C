@@ -28,6 +28,7 @@ struct SettingsView<ViewModel: SettingsViewModelProtocol>: View {
                 y: Measures.Spacing.compact
             )
         }
+        .navigationTitle("settings.title".localized)
     }
     
     // MARK: Subviews

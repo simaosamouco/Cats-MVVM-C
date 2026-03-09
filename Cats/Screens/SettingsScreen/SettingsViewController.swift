@@ -8,50 +8,17 @@
 import UIKit
 import SwiftUI
 
-class SettingsViewController: UIViewController {
+class SettingsViewController<Content: View>: ThemeHostingController<Content> {
     
-    private let viewModel: any SettingsViewModelProtocol
-    
-    init(viewModel: any SettingsViewModelProtocol) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+    private weak var viewModel: (any SettingsViewModelProtocol)?
+
+    init(view: Content,
+         viewModel: some SettingsViewModelProtocol) {
+        super.init(rootView: view)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addSwiftUIView()
-        self.title = "settings.title".localized
-    }
-    
-    private func addSwiftUIView() {
-        guard let viewModel = viewModel as? SettingsViewModel else { return }
-        let swiftUIView = SettingsView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: swiftUIView)
-
-        addChild(hostingController)
-        view.addSubview(hostingController.view)
-
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            hostingController.view.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor
-            ),
-            hostingController.view.bottomAnchor.constraint(
-                equalTo: view.bottomAnchor
-            ),
-            hostingController.view.leadingAnchor.constraint(
-                equalTo: view.leadingAnchor
-            ),
-            hostingController.view.trailingAnchor.constraint(
-                equalTo: view.trailingAnchor
-            ),
-        ])
-
-        hostingController.didMove(toParent: self)
     }
 
 }
