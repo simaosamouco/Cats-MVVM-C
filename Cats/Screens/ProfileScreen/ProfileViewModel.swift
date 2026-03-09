@@ -12,6 +12,7 @@ protocol ProfileViewModelProtocol: ObservableObject {
     var breedName: String { get }
     var breedDescription: String { get }
     var toolBarImage: Image { get }
+    var showContent: Bool { get }
     
     func didTapSaveButton()
     func checkCatSavedStatus()
@@ -23,6 +24,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     @Published var isCatSaved: Bool = false
     let breedName: String
     let breedDescription: String
+    var showContent: Bool { image != nil }
     var toolBarImage: Image {
         isCatSaved ? Image(systemName: "bookmark.fill") : Image(systemName: "bookmark")
     }

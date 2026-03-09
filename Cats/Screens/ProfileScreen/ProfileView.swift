@@ -10,7 +10,6 @@ import SwiftUI
 struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
     
     @ObservedObject var viewModel: ViewModel
-    @State private var showContent = false
     
     var body: some View {
         ScrollView {
@@ -22,11 +21,9 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
+            .animation(.default, value: viewModel.showContent)
         }
         .scrollIndicators(.hidden)
-        .onChange(of: viewModel.image) { _, newImage in
-            handleImageChange(newImage)
-        }
         .toolbar {
             saveButton
         }
@@ -41,32 +38,32 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .shadow(radius: Measures.Size.mini, y: Measures.Size.mini)
-            .opacity(showContent ? 1 : 0)
-            .animation(.easeOut(duration: 0.8), value: showContent)
+            .transition(
+                .opacity
+                .animation(.easeOut(duration: 0.8))
+            )
         
         Text(viewModel.breedName)
             .font(.title)
             .fontWeight(.bold)
             .foregroundStyle(.primary)
             .multilineTextAlignment(.center)
-            .offset(y: showContent ? 0 : Measures.Size.xxLarge)
-            .opacity(showContent ? 1 : 0)
-            .animation(.easeOut(duration: 0.3).delay(0.2), value: showContent)
+            .transition(
+                .opacity.combined(with: .offset(y: Measures.Size.xxLarge))
+                .animation(.easeOut(duration: 0.3).delay(0.2))
+            )
             .padding(.top, Measures.Spacing.regular)
         
         Text(viewModel.breedDescription)
             .multilineTextAlignment(.center)
-            .offset(y: showContent ? 0 : Measures.Size.xxLarge)
-            .opacity(showContent ? 1 : 0)
-            .blur(radius: showContent ? 0 : Measures.Spacing.tight)
-            .animation(.easeOut(duration: 0.4).delay(0.3), value: showContent)
+            .transition(
+                .opacity
+                .combined(with: .offset(y: Measures.Size.xxLarge))
+                .animation(.easeOut(duration: 0.4).delay(0.3))
+            )
             .padding([.top, .horizontal], Measures.Spacing.regular)
         
         Spacer(minLength: 0)
-    }
-    
-    private func handleImageChange(_ newImage: UIImage?) {
-        showContent = (newImage != nil)
     }
     
     private var saveButton: some ToolbarContent {
