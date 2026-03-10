@@ -21,11 +21,17 @@ protocol NetworkServiceProtocol {
 
 /// A concrete implementation of `NetworkServiceProtocol` using `URLSession`.
 final class NetworkService: NetworkServiceProtocol {
+
+    private let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
     
     /// Fetches raw data from the specified URL asynchronously.
     func fetchData(from url: URL) async throws -> Data {
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await session.data(from: url)
             return data
         } catch {
             throw CatsError.fetchingDataFailed
