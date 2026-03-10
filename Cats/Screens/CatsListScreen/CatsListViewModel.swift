@@ -98,9 +98,9 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     /// If the `searchText` is not empty then it will compare the displayed Cat ID with the ID from the last cat on the published cats array
     /// If equal it fetches aditional Cats from the server as pagination.
     func didShowCat(_ cat: CatCellViewModel) {
-        guard searchText.isEmpty else { return }
-        guard cat.id == publishedCats.last?.id else { return }
-        guard !isLoadingPagination else { return }
+        guard searchText.isEmpty,
+              cat.id == publishedCats.last?.id,
+              !isLoadingPagination else { return }
         getCats(for: .pagination)
     }
     
