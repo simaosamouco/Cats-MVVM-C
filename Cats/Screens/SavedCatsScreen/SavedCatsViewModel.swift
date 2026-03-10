@@ -10,7 +10,7 @@ import Foundation
 protocol SavedCatsViewModelProtocol: ObservableObject {
     var cats: [CatCellViewModel] { get }
     var isLoading: Bool { get }
-    func getSavedCats()
+    func getSavedCats() async
     func didTapCat(_ cat: CatCellViewModel)
 }
 
@@ -37,20 +37,18 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
     }
     
     /// Fetches cats from the devices memory, updates the list, and manages loading state.
-    func getSavedCats() {
-        Task {
-            toggleLoading(to: true)
-            defer { toggleLoading(to: false) }
-            do {
-                let savedCats = try await getCatsUseCase.get(for: 1)
-                self.catsModels = savedCats
-                let catCellViewModels = createViewModels(from: savedCats)
-                Task { @MainActor in
-                    self.cats = catCellViewModels
-                }
-            } catch {
-                coordinator.showError(error)
+    func getSavedCats() async {
+        toggleLoading(to: true)
+        defer { toggleLoading(to: false) }
+        do {
+            let savedCats = try await getCatsUseCase.get(for: 1)
+            self.catsModels = savedCats
+            let catCellViewModels = createViewModels(from: savedCats)
+            await MainActor.run {
+                self.cats = catCellViewModels
             }
+        } catch {
+            coordinator.showError(error)
         }
     }
     

@@ -27,8 +27,8 @@ struct ProfileView<ViewModel: ProfileViewModelProtocol>: View {
         .toolbar {
             saveButton
         }
-        .onAppear {
-            viewModel.checkCatSavedStatus()
+        .task {
+            await viewModel.checkCatSavedStatus()
         }
     }
     

@@ -43,8 +43,8 @@ struct SavedCatsView<ViewModel: SavedCatsViewModelProtocol>: View  {
                 toggleLayoutButton
             }
         }
-        .onAppear {
-            viewModel.getSavedCats()
+        .task {
+            await viewModel.getSavedCats()
         }
         .navigationTitle("savedCats.title".localized)
     }

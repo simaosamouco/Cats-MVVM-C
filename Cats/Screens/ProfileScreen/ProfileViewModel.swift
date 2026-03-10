@@ -15,7 +15,7 @@ protocol ProfileViewModelProtocol: ObservableObject {
     var showContent: Bool { get }
     
     func didTapSaveButton()
-    func checkCatSavedStatus()
+    func checkCatSavedStatus() async
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {
@@ -47,19 +47,19 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
         self.breedName = cat.breedName
         self.breedDescription = cat.breedDescription
-        checkCatSavedStatus()
         loadImage()
     }
     
-    /// Called by the `ViewController` on `viewWillAppear`
+    /// Called by the `View` on `.task`
     /// to update the navigation bar item based on the `Cat` saved status in device memory.
-    func checkCatSavedStatus() {
-        Task { @MainActor in
-            do {
-                isCatSaved = try await self.catsPersistanceUseCase.isCatSaved(id: cat.id)
-            } catch {
-                coordinator.showError(error)
+    func checkCatSavedStatus() async {
+        do {
+            let saved = try await catsPersistanceUseCase.isCatSaved(id: cat.id)
+            await MainActor.run {
+                isCatSaved = saved
             }
+        } catch {
+            coordinator.showError(error)
         }
     }
     
