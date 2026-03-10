@@ -9,8 +9,6 @@ import SwiftUI
 
 final class TestViewController<ViewModel: TestViewModelProtocol>: ThemeHostingController<TestView<ViewModel>> {
     
-    private weak var viewModel: (any TestViewModelProtocol)?
-   
     init(viewModel: ViewModel) {
         super.init(rootView: TestView(viewModel: viewModel))
     }
