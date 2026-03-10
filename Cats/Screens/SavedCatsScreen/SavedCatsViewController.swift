@@ -7,13 +7,10 @@
 
 import SwiftUI
 
-final class SavedCatsViewController<Content: View>: ThemeHostingController<Content>  {
+final class SavedCatsViewController<ViewModel: SavedCatsViewModelProtocol>: ThemeHostingController<SavedCatsView<ViewModel>> {
     
-    private weak var viewModel: (any SavedCatsViewModelProtocol)?
-   
-    init(view: Content,
-         viewModel: some SavedCatsViewModelProtocol) {
-        super.init(rootView: view)
+    init(viewModel: ViewModel) {
+        super.init(rootView: SavedCatsView(viewModel: viewModel))
     }
     
     required init?(coder: NSCoder) {

@@ -7,17 +7,14 @@
 
 import SwiftUI
 
-class ProfileViewController<Content: View>: ThemeHostingController<Content> {
- 
-    private weak var viewModel: (any ProfileViewModelProtocol)?
-
-    init(view: Content,
-         viewModel: some ProfileViewModelProtocol) {
-        super.init(rootView: view)
+final class ProfileViewController<ViewModel: ProfileViewModelProtocol>: ThemeHostingController<ProfileView<ViewModel>> {
+    
+    init(viewModel: ViewModel) {
+        super.init(rootView: ProfileView(viewModel: viewModel))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

@@ -53,11 +53,7 @@ final class Factory: FactoryProtocol {
             getImageFromUrlUseCase: getImageUseCase,
             catFilterUseCase: catFilterUseCase
         )
-        let view = CatsListView(viewModel: viewModel)
-        return CatsListViewController(
-            view: view,
-            viewModel: viewModel
-        )
+        return CatsListViewController(viewModel: viewModel)
     }
     
     func createSavedCatsViewController(navController: UINavigationController) -> UIViewController {
@@ -76,11 +72,7 @@ final class Factory: FactoryProtocol {
             getCatsUseCase: getCatsUseCase,
             getImageFromUrlUseCase: getImageUseCase
         )
-        let view = SavedCatsView(viewModel: viewModel)
-        return SavedCatsViewController(
-            view: view,
-            viewModel: viewModel
-        )
+        return SavedCatsViewController(viewModel: viewModel)
     }
     
     func createProfileViewController(navController: UINavigationController,
@@ -98,11 +90,7 @@ final class Factory: FactoryProtocol {
             catsPersistanceUseCase: catsPersistanceUseCase,
             getImageFromUrlUseCase: getImageUseCase
         )
-        let view = ProfileView(viewModel: viewModel)
-        return ProfileViewController(
-            view: view,
-            viewModel: viewModel
-        )
+        return ProfileViewController(viewModel: viewModel)
     }
     
     func createSettingsViewController(navController: UINavigationController) -> UIViewController {
@@ -116,11 +104,7 @@ final class Factory: FactoryProtocol {
             ),
             appThemeUseCase: appThemeUseCase
         )
-        let view = SettingsView(viewModel: viewModel)
-        return SettingsViewController(
-            view: view,
-            viewModel: viewModel
-        )
+        return SettingsViewController(viewModel: viewModel)
     }
     
     func createAboutViewController(navController: UINavigationController) -> UIViewController {
@@ -134,11 +118,7 @@ final class Factory: FactoryProtocol {
                 tabBarCoordinator: tabBarCoordinator
             )
         )
-        let view = AboutView(viewModel: viewModel)
-        return AboutViewController(
-            view: view,
-            viewModel: viewModel
-        )
+        return AboutViewController(viewModel: viewModel)
     }
     
     func createTestViewController(navController: UINavigationController,
@@ -151,11 +131,7 @@ final class Factory: FactoryProtocol {
                 coreCoordinator: coreCoordinator
             ), isModallyPresented: isModallyPresented
         )
-        let view = TestView(viewModel: viewModel)
-        return TestViewController(
-            view: view,
-            viewModel: viewModel
-        )
+        return TestViewController(viewModel: viewModel)
     }
     
 }

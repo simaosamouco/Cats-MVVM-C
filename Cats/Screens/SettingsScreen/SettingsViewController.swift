@@ -7,17 +7,14 @@
 
 import SwiftUI
 
-class SettingsViewController<Content: View>: ThemeHostingController<Content> {
+final class SettingsViewController<ViewModel: SettingsViewModelProtocol>: ThemeHostingController<SettingsView<ViewModel>> {
     
-    private weak var viewModel: (any SettingsViewModelProtocol)?
-
-    init(view: Content,
-         viewModel: some SettingsViewModelProtocol) {
-        super.init(rootView: view)
+    init(viewModel: ViewModel) {
+        super.init(rootView: SettingsView(viewModel: viewModel))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

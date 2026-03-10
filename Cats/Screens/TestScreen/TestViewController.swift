@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-final class TestViewController<Content: View>: ThemeHostingController<Content> {
+final class TestViewController<ViewModel: TestViewModelProtocol>: ThemeHostingController<TestView<ViewModel>> {
     
     private weak var viewModel: (any TestViewModelProtocol)?
    
-    init(view: Content,
-         viewModel: some TestViewModelProtocol) {
-        super.init(rootView: view)
+    init(viewModel: ViewModel) {
+        super.init(rootView: TestView(viewModel: viewModel))
     }
     
     required init?(coder: NSCoder) {
