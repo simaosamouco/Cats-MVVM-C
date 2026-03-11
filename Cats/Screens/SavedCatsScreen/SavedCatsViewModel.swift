@@ -41,7 +41,7 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
         toggleLoading(to: true)
         defer { toggleLoading(to: false) }
         do {
-            let savedCats = try await getCatsUseCase.get(for: 1)
+            let savedCats = try await getCatsUseCase.get()
             self.catsModels = savedCats
             let catCellViewModels = createViewModels(from: savedCats)
             await MainActor.run {
