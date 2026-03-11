@@ -24,7 +24,7 @@ final class LocalConfigurationRepository: LocalConfigurationRepositoryProtocol {
     /// Stores a `Codable` value for a given key.
     ///
     /// Values are encoded as JSON data before storing.
-    func set<T: Codable>(_ value: T, for key: LocalConfigKey) {
+    func set<T: Codable>(_ value: T, for key: ConfigurationKey) {
         if let data = try? encoder.encode(value) {
             userDefaults.set(data, forKey: key.rawValue)
         }
@@ -33,7 +33,7 @@ final class LocalConfigurationRepository: LocalConfigurationRepositoryProtocol {
     /// Retrieves a `Codable` value for a given key.
     ///
     /// Values are decoded from JSON data.
-    func get<T: Codable>(for key: LocalConfigKey, as type: T.Type) -> T? {
+    func get<T: Codable>(for key: ConfigurationKey, as type: T.Type) -> T? {
         guard let data = userDefaults.data(forKey: key.rawValue) else {
             return nil
         }
@@ -41,12 +41,12 @@ final class LocalConfigurationRepository: LocalConfigurationRepositoryProtocol {
     }
     
     /// Removes the value for a given key from `UserDefaults`.
-    func remove(for key: LocalConfigKey) {
+    func remove(for key: ConfigurationKey) {
         userDefaults.removeObject(forKey: key.rawValue)
     }
     
     /// Checks if a value exists for a given key.
-    func exists(for key: LocalConfigKey) -> Bool {
+    func exists(for key: ConfigurationKey) -> Bool {
         userDefaults.object(forKey: key.rawValue) != nil
     }
     

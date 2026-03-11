@@ -36,6 +36,7 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
     }
     
+    // MARK: Public Methods
     /// Fetches cats from the devices memory, updates the list, and manages loading state.
     func getSavedCats() async {
         toggleLoading(to: true)
@@ -59,6 +60,7 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
         coordinator.goToCatProfile(catModel)
     }
     
+    // MARK: Private Mehtods
     /// Transforms an array of `Cat` into `CatCellViewModel`.
     private func createViewModels(from cats: [Cat]) -> [CatCellViewModel] {
         cats.compactMap {
