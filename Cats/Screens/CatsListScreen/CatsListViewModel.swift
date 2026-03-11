@@ -24,6 +24,7 @@ protocol CatsListViewModelProtocol: ObservableObject {
     func didTapCat(_ cat: CatCellViewModel)
     func didTapBookmarkButton()
     func didShowCat(_ cat: CatCellViewModel)
+    func didTapClearTextFiedButton()
     
 }
 
@@ -87,6 +88,10 @@ final class CatsListViewModel: CatsListViewModelProtocol {
               cat.id == publishedCats.last?.id,
               !isLoadingPagination else { return }
         getCats(for: .pagination)
+    }
+    
+    func didTapClearTextFiedButton() {
+        searchText = ""
     }
     
     // MARK: - Private methods

@@ -31,6 +31,7 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
                             paginationLoader
                         }
                     }
+                    .scrollDismissesKeyboard(.immediately)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -45,18 +46,37 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
     // MARK: Subviews
     
     private var searchTextField: some View {
-        TextField("catsList.textField.placeholder".localized,
-                  text: $viewModel.searchText)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: Measures.CornerRadius.xLarge)
-                    .stroke(isFocused ? .blue : .gray, lineWidth: 2)
-                    .animation(.easeInOut(duration: 0.3), value: isFocused)
-            )
-            .scaleEffect(isFocused ? 1.05 : 1.0)
-            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isFocused)
-            .focused($isFocused)
-            .padding(.horizontal, Measures.Spacing.medium)
+        HStack {
+            TextField("catsList.textField.placeholder".localized,
+                      text: $viewModel.searchText)
+                .focused($isFocused)
+            
+            if !viewModel.searchText.isEmpty {
+                clearButton
+            }
+        }
+        .padding()
+        .background(textFieldBackground)
+        .scaleEffect(isFocused ? 1.05 : 1.0)
+        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isFocused)
+        .animation(.easeInOut(duration: 0.2), value: viewModel.searchText.isEmpty)
+        .padding(.horizontal, Measures.Spacing.medium)
+    }
+
+    private var clearButton: some View {
+        Button {
+            viewModel.didTapClearTextFiedButton()
+        } label: {
+            Image(systemName: "xmark.circle.fill")
+                .foregroundStyle(.gray)
+        }
+        .transition(.scale.combined(with: .opacity))
+    }
+
+    private var textFieldBackground: some View {
+        RoundedRectangle(cornerRadius: Measures.CornerRadius.xLarge)
+            .stroke(isFocused ? .blue : .gray, lineWidth: 2)
+            .animation(.easeInOut(duration: 0.3), value: isFocused)
     }
     
     private var bookMarkButton: some View {
