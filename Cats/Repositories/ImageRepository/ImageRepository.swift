@@ -7,13 +7,6 @@
 
 import UIKit
 
-protocol ImageRepositoryProtocol {
-    /// Fetches an image from the given URL string, returning a cached version if available.
-    ///
-    /// - Parameter imageURL: The URL string of the image to fetch.
-    func get(from imageURL: String) async throws -> UIImage
-}
-
 /// A concrete implementation of `ImageRepositoryProtocol` that fetches images over
 /// the network and caches them locally to avoid redundant requests.
 final class ImageRepository: ImageRepositoryProtocol {
