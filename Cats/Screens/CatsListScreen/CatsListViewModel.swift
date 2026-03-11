@@ -75,8 +75,7 @@ final class CatsListViewModel: CatsListViewModelProtocol {
    
     /// Called by the `View` when a cell gets tapped
     func didTapCat(_ cat: CatCellViewModel) {
-        /// Gets the `Cat` model with the same `ID` as the `CatCell` to pass on the navigation
-        guard let catModel: Cat = catsModels.first(where: { $0.id == cat.id }) else { return }
+        guard let catModel = getCatModel(for: cat) else { return }
         coordinator.goToCatProfile(catModel)
     }
     
@@ -159,6 +158,11 @@ final class CatsListViewModel: CatsListViewModelProtocol {
                 self.isLoadingPagination = isLoading
             }
         }
+    }
+    
+    /// Returns the `Cat` model matching the given `CatCellViewModel` ID
+    private func getCatModel(for cell: CatCellViewModel) -> Cat? {
+        catsModels.first(where: { $0.id == cell.id })
     }
    
 }
