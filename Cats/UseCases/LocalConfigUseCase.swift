@@ -43,6 +43,8 @@ protocol LocalConfigUseCaseProtocol {
 final class LocalConfigUseCase: LocalConfigUseCaseProtocol {
     
     private let userDefaults: UserDefaults
+    private lazy var decoder = JSONDecoder()
+    private lazy var encoder = JSONEncoder()
   
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
@@ -52,7 +54,7 @@ final class LocalConfigUseCase: LocalConfigUseCaseProtocol {
     ///
     /// Values are encoded as JSON data before storing.
     func set<T: Codable>(_ value: T, for key: LocalConfigKey) {
-        if let data = try? JSONEncoder().encode(value) {
+        if let data = try? encoder.encode(value) {
             userDefaults.set(data, forKey: key.rawValue)
         }
     }
@@ -64,7 +66,7 @@ final class LocalConfigUseCase: LocalConfigUseCaseProtocol {
         guard let data = userDefaults.data(forKey: key.rawValue) else {
             return nil
         }
-        return try? JSONDecoder().decode(T.self, from: data)
+        return try? decoder.decode(T.self, from: data)
     }
     
     /// Removes the value for a given key from `UserDefaults`.
