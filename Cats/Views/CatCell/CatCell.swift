@@ -83,11 +83,6 @@ struct CatCell<ViewModel: CatCellViewModelProtocol>: View {
             .lineLimit(2)
             .foregroundColor(.primary)
             .opacity(viewModel.image != nil ? 1 : 0.6)
-            .animation(
-                .easeInOut(duration: 0.4)
-                    .delay(viewModel.image != nil ? 0.2 : 0),
-                value: viewModel.image != nil
-            )
     }
     
 }
