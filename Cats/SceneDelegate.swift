@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let factory = Factory()
         
-        let appThemeUseCase = factory.resolve(AppThemeUseCaseProtocol.self)
-        let initializer = AppInitializer(appThemeUseCase: appThemeUseCase)
+        let initializer: AppInitializer = factory.createAppInitializer()
         
         initializer.configureNavigationBar()
         initializer.configureTabBar()

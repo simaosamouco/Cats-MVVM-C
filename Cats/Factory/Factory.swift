@@ -9,6 +9,7 @@ import UIKit
 
 protocol FactoryProtocol: AnyObject {
     
+    func createAppInitializer() -> AppInitializer
     func createTabBarController() -> MainTabBarController
     func createCatsListController(navController: UINavigationController) -> UIViewController
     func createSavedCatsViewController(navController: UINavigationController) -> UIViewController
@@ -28,6 +29,12 @@ final class Factory: FactoryProtocol {
     
     init() {
         registerDependencies()
+    }
+    
+    func createAppInitializer() -> AppInitializer {
+        let configurationRepository = resolve(LocalConfigurationRepositoryProtocol.self)
+        let appThemeUseCase = AppThemeUseCase(configurationRepository: configurationRepository)
+        return AppInitializer(appThemeUseCase: appThemeUseCase)
     }
     
     func createTabBarController() -> MainTabBarController {
@@ -96,7 +103,8 @@ final class Factory: FactoryProtocol {
     func createSettingsViewController(navController: UINavigationController) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
-        let appThemeUseCase = resolve(AppThemeUseCaseProtocol.self)
+        let configurationRepository = resolve(LocalConfigurationRepositoryProtocol.self)
+        let appThemeUseCase = AppThemeUseCase(configurationRepository: configurationRepository)
         let viewModel = SettingsViewModel(
             coordinator: SettingsCoordinator(
                 factory: self,

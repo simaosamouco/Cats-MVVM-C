@@ -24,10 +24,10 @@ protocol AppThemeUseCaseProtocol {
 /// It persists the selected theme in the local configuration.
 final class AppThemeUseCase: AppThemeUseCaseProtocol {
     
-    private let localConfig: LocalConfigUseCaseProtocol
+    private let configurationRepository: ConfigurationRepositoryProtocol
     
-    init(localConfig: LocalConfigUseCaseProtocol) {
-        self.localConfig = localConfig
+    init(configurationRepository: ConfigurationRepositoryProtocol) {
+        self.configurationRepository = configurationRepository
     }
     
     /// Retrieves the current theme applied in the app.
@@ -36,7 +36,7 @@ final class AppThemeUseCase: AppThemeUseCaseProtocol {
     /// If no value is found, it defaults to `.system`.
     /// - Returns: The current `Theme`.
     func getCurrentTheme() -> Theme {
-        let raw: Int = localConfig.get(for: .appTheme, as: Int.self) ?? Theme.system.value
+        let raw: Int = configurationRepository.get(for: .appTheme, as: Int.self) ?? Theme.system.value
         return Theme.allCases.first { $0.value == raw } ?? .system
     }
     
@@ -49,7 +49,7 @@ final class AppThemeUseCase: AppThemeUseCaseProtocol {
     func switchTheme(to theme: Theme) {
         applyTheme(UIUserInterfaceStyle(rawValue: theme.value) ?? .light)
         /// Saves `Theme` in local config to use on app launch.
-        localConfig.set(theme.value, for: .appTheme)
+        configurationRepository.set(theme.value, for: .appTheme)
     }
     
     private func applyTheme(_ style: UIUserInterfaceStyle) {
@@ -58,4 +58,5 @@ final class AppThemeUseCase: AppThemeUseCaseProtocol {
             window.overrideUserInterfaceStyle = style
         }
     }
+    
 }

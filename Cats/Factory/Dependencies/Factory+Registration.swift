@@ -14,17 +14,11 @@ extension Factory {
     func registerDependencies() {
 
         /// LocalConfigUseCaseProtocol
-        register(LocalConfigUseCaseProtocol.self, instance: LocalConfigUseCase())
+        register(LocalConfigurationRepositoryProtocol.self, instance: LocalConfigurationRepository())
         
         /// NetworkServiceProtocol
         register(NetworkServiceProtocol.self, instance: NetworkService())
         
-        /// AppThemeUseCase
-        let localConfig = resolve(LocalConfigUseCaseProtocol.self)
-        register(AppThemeUseCaseProtocol.self, instance: AppThemeUseCase(
-            localConfig: localConfig)
-        )
-
         /// CatsServicesProtocol (lazy, resolves NetworkService when needed)
         registerLazy(CatsServicesProtocol.self) {
             let networkService = self.resolve(NetworkServiceProtocol.self)
