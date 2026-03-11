@@ -36,6 +36,9 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             bookMarkButton
         }
+        .onFirstAppear {
+            viewModel.getCats(for: .initial)
+        }
         .navigationTitle("catsList.title".localized)
     }
     

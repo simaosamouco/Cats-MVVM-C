@@ -11,7 +11,6 @@ final class CatsListViewController<ViewModel: CatsListViewModelProtocol>: ThemeH
     
     init(viewModel: ViewModel) {
         super.init(rootView: CatsListView(viewModel: viewModel))
-        viewModel.getCats(for: .initial)
     }
     
     required init?(coder: NSCoder) {
