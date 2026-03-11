@@ -20,7 +20,7 @@ protocol CatsListViewModelProtocol: ObservableObject {
     var isLoadingPagination: Bool { get }
     var searchText: String { get set }
     
-    func getCats(for type: LoadingType)
+    func onFirstAppear()
     func didTapCat(_ cat: CatCellViewModel)
     func didTapBookmarkButton()
     func didShowCat(_ cat: CatCellViewModel)
@@ -64,6 +64,9 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     }
     
     // MARK: - Public methods
+    func onFirstAppear() {
+        getCats(for: .initial)
+    }
     
     /// Called by the `View` to change Tab
     func didTapBookmarkButton() {
@@ -77,8 +80,20 @@ final class CatsListViewModel: CatsListViewModelProtocol {
         coordinator.goToCatProfile(catModel)
     }
     
+    /// Called by the `View` whenever a new CatCell is displayed.
+    /// If the `searchText` is not empty then it will compare the displayed Cat ID with the ID from the last cat on the published cats array
+    /// If equal it fetches aditional Cats from the server as pagination.
+    func didShowCat(_ cat: CatCellViewModel) {
+        guard searchText.isEmpty,
+              cat.id == publishedCats.last?.id,
+              !isLoadingPagination else { return }
+        getCats(for: .pagination)
+    }
+    
+    // MARK: - Private methods
+    
     /// Fetches cats from the API, updates the list, and manages loading state.
-    func getCats(for type: LoadingType) {
+    private func getCats(for type: LoadingType) {
         getCatsTask?.cancel()
         getCatsTask = Task {
             toggleLoading(for: type, to: true)
@@ -93,18 +108,6 @@ final class CatsListViewModel: CatsListViewModelProtocol {
             }
         }
     }
-    
-    /// Called by the `View` whenever a new CatCell is displayed.
-    /// If the `searchText` is not empty then it will compare the displayed Cat ID with the ID from the last cat on the published cats array
-    /// If equal it fetches aditional Cats from the server as pagination.
-    func didShowCat(_ cat: CatCellViewModel) {
-        guard searchText.isEmpty,
-              cat.id == publishedCats.last?.id,
-              !isLoadingPagination else { return }
-        getCats(for: .pagination)
-    }
-    
-    // MARK: - Private methods
     
     /// Binds `searchText` to `publishedCats`, filtering results with debounce to update efficiently.
     private func setupSearchBinding() {
