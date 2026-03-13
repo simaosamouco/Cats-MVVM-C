@@ -23,7 +23,7 @@ enum Endpoints {
     ///   - page: The page number to fetch (zero-based).
     ///   - limit: The maximum number of results per page (default: 15).
     ///   - hasBreeds: If true, only results with breed information are included (default: true).
-    ///   - order: The sort order for results, such as 'rand' for random (default: 'rand').
+    ///   - order: The sort order for results, .random being the default.
     case getCats(page: Int,
                  limit: Int = 15,
                  hasBreeds: Bool = true,
