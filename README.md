@@ -75,7 +75,7 @@ To optimize this, I created an Xcode file template. So by simply creating a new 
 
 https://github.com/user-attachments/assets/de4f7ab1-fcc6-43f9-8379-d71736d6cb07
 
-
+(Template has been updated since recording, but you get the idea)
 
 </div>
 
