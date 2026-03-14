@@ -24,7 +24,7 @@ protocol CatsListViewModelProtocol: ObservableObject {
     func didTapCat(_ cat: CatCellViewModel)
     func didTapBookmarkButton()
     func didShowCat(_ cat: CatCellViewModel)
-    func didTapClearTextFiedButton()
+    func didTapClearTextFieldButton()
     
 }
 
@@ -82,7 +82,7 @@ final class CatsListViewModel: CatsListViewModelProtocol {
     
     /// Called by the `View` whenever a new CatCell is displayed.
     /// If the `searchText` is not empty then it will compare the displayed Cat ID with the ID from the last cat on the published cats array
-    /// If equal it fetches aditional Cats from the server as pagination.
+    /// If equal it fetches additional Cats from the server as pagination.
     func didShowCat(_ cat: CatCellViewModel) {
         guard searchText.isEmpty,
               cat.id == publishedCats.last?.id,
@@ -90,7 +90,7 @@ final class CatsListViewModel: CatsListViewModelProtocol {
         getCats(for: .pagination)
     }
     
-    func didTapClearTextFiedButton() {
+    func didTapClearTextFieldButton() {
         searchText = ""
     }
     
@@ -153,18 +153,16 @@ final class CatsListViewModel: CatsListViewModelProtocol {
   
     /// Updates the `Loading` state for the whole view or pagination
     private func toggleLoading(for type: LoadingType, to isLoading: Bool) {
-        switch type {
-        case .initial:
-            Task { @MainActor in
+        Task { @MainActor in
+            switch type {
+            case .initial:
                 self.isLoading = isLoading
-            }
-        case .pagination:
-            Task { @MainActor in
+            case .pagination:
                 self.isLoadingPagination = isLoading
             }
         }
     }
-    
+
     /// Returns the `Cat` model matching the given `CatCellViewModel` ID
     private func getCatModel(for cell: CatCellViewModel) -> Cat? {
         catsModels.first(where: { $0.id == cell.id })

@@ -11,7 +11,7 @@ import Foundation
 
 enum Order: String {
     case random = "rand"
-    case ascendng = "asc"
+    case ascending = "asc"
     case descending = "desc"
 }
 
@@ -36,7 +36,7 @@ enum Endpoints {
 
     /// Constructs the URL for the given endpoint case.
     /// - Returns: A fully formed URL for the endpoint.
-    /// - Throws: `CatsErros.invalidURL` if the URL cannot be constructed.
+    /// - Throws: `CatsErrors.invalidURL` if the URL cannot be constructed.
     func url() throws -> URL {
         var components = URLComponents()
         components.scheme = "https"

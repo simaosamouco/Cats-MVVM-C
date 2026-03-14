@@ -65,7 +65,7 @@ struct CatsListView<ViewModel: CatsListViewModelProtocol>: View {
 
     private var clearButton: some View {
         Button {
-            viewModel.didTapClearTextFiedButton()
+            viewModel.didTapClearTextFieldButton()
         } label: {
             Image(systemName: "xmark.circle.fill")
                 .foregroundStyle(.gray)

@@ -60,7 +60,7 @@ final class SavedCatsViewModel: SavedCatsViewModelProtocol {
         coordinator.goToCatProfile(catModel)
     }
     
-    // MARK: Private Mehtods
+    // MARK: Private Methods
     /// Transforms an array of `Cat` into `CatCellViewModel`.
     private func createViewModels(from cats: [Cat]) -> [CatCellViewModel] {
         cats.compactMap {
