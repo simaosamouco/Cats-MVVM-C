@@ -8,7 +8,7 @@
 /// This protocol intentionally adds no new requirements. Its purpose is to allow
 /// the dependency injection container to distinguish between multiple concrete
 /// implementations of `CatsRepositoryProtocol`
-protocol RemoteCatsRepositoryProtocol: CatsRepositoryProtocol { }
+protocol RemoteCatsRepositoryProtocol: CatsFetchRepositoryProtocol { }
 
 /// A concrete implementation of `LocalCatsRepositoryProtocol` that fetches cats
 /// from the API via a `CatsServicesProtocol`.

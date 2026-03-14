@@ -38,7 +38,7 @@ final class SavedCatsCoordinator: SavedCatsCoordinatorProtocol {
     func goToCatProfile(_ cat: Cat) {
         let profileVC = factory.createProfileViewController(
             navController: coreCoordinator.navigationController,
-            cat: cat.toCatProfile()
+            cat: cat
         )
         coreCoordinator.goToScreen(profileVC)
     }
