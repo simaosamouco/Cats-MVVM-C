@@ -14,8 +14,10 @@ enum CatsError: Error {
     case decodingFailed
     /// Indicates a network or data fetching failure occurred.
     case fetchingDataFailed
-    // TODO: add documentation here
+    /// Indicates image has invalid data
     case invalidImageData
+    
+    case persistence
     
     /// Provides a localized error description for each error case.
     var errorDescription: String? {
@@ -28,6 +30,8 @@ enum CatsError: Error {
             return "errors.fetchingDataFailed".localized
         case .invalidImageData:
             return "errors.invalidImageData".localized
+        case .persistence:
+            return "errors.persistence".localized
         }
     }
     

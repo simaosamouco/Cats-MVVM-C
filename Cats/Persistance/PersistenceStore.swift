@@ -60,33 +60,57 @@ protocol PersistenceStoreProtocol {
 actor PersistenceStore: PersistenceStoreProtocol {
     
     func fetch<Entity: PersistentModel>() throws -> [Entity] {
-        let descriptor = FetchDescriptor<Entity>()
-        return try modelContext.fetch(descriptor)
+        do {
+            let descriptor = FetchDescriptor<Entity>()
+            return try modelContext.fetch(descriptor)
+        } catch {
+            throw CatsError.persistence
+        }
     }
     
     func fetch<Entity: PersistentModel>(predicate: Predicate<Entity>) throws -> [Entity] {
-        let descriptor = FetchDescriptor<Entity>(predicate: predicate)
-        return try modelContext.fetch(descriptor)
+        do {
+            let descriptor = FetchDescriptor<Entity>(predicate: predicate)
+            return try modelContext.fetch(descriptor)
+        } catch {
+            throw CatsError.persistence
+        }
     }
     
     func insert<Entity: PersistentModel>(_ entity: Entity) throws {
-        modelContext.insert(entity)
-        try modelContext.save()
+        do {
+            modelContext.insert(entity)
+            try modelContext.save()
+        } catch {
+            throw CatsError.persistence
+        }
     }
     
     func delete<Entity: PersistentModel>(_ entity: Entity) throws {
-        modelContext.delete(entity)
-        try modelContext.save()
+        do {
+            modelContext.delete(entity)
+            try modelContext.save()
+        } catch {
+            throw CatsError.persistence
+        }
     }
     
     func delete<Entity: PersistentModel>(predicate: Predicate<Entity>) throws {
-        let results = try fetch(predicate: predicate)
-        results.forEach { modelContext.delete($0) }
-        try modelContext.save()
+        do {
+            let results = try fetch(predicate: predicate)
+            results.forEach { modelContext.delete($0) }
+            try modelContext.save()
+        } catch {
+            throw CatsError.persistence
+        }
     }
     
     func exists<Entity: PersistentModel>(predicate: Predicate<Entity>) throws -> Bool {
-        return try !fetch(predicate: predicate).isEmpty
+        do {
+            return try !fetch(predicate: predicate).isEmpty
+        } catch {
+            throw CatsError.persistence
+        }
     }
     
 }
