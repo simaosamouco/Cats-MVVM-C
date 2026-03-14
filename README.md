@@ -15,7 +15,8 @@ https://github.com/user-attachments/assets/d10c7764-b00f-42ae-83c2-13274bd19997
 <br>
 
 ## System Design
-<img width="5504" height="5392" alt="image" src="https://github.com/user-attachments/assets/07d9a0d7-e602-4fe2-bb9b-3eb5160f8c46" />
+
+![WhatsApp Image 2026-03-14 at 17 37 27](https://github.com/user-attachments/assets/36e754a0-8408-4466-8cb3-89b34df66467)
 
 
 
