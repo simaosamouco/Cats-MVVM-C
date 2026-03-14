@@ -5,17 +5,20 @@
 //  Created by Simão Neves Samouco on 07/08/2025.
 //
 
-protocol CatDetailLocalManagementUseCaseProtocol {
+protocol CatSaveUseCaseProtocol {
     func saveCat(_ cat: Cat) async throws
     func deleteCat(_ cat: Cat) async throws
     func isCatSaved(_ cat: Cat) async throws -> Bool
 }
 
-final class CatDetailLocalManagementUseCase: CatDetailLocalManagementUseCaseProtocol {
+/// TODO: Add documentation explaing that this use case might look pointless
+///  The goal is to follow the same patterns as other view model
+///  And if in the future extra logic is required (like transform the object to a certain type) this use case would be useful
+final class CatSaveUseCase: CatSaveUseCaseProtocol {
     
-    private let catDetailRepository: CatDetailRepositoryProtocol
+    private let catDetailRepository: CatsPersistenceRepositoryProtocol
     
-    init(catDetailRepository: CatDetailRepositoryProtocol) {
+    init(catDetailRepository: CatsPersistenceRepositoryProtocol) {
         self.catDetailRepository = catDetailRepository
     }
     

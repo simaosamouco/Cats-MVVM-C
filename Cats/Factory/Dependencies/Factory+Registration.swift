@@ -51,7 +51,7 @@ extension Factory {
             return LocalCatsRepository(store: persistenceStore)
         }
 
-        registerLazy(CatDetailRepositoryProtocol.self) {
+        registerLazy(CatsPersistenceRepositoryProtocol.self) {
             return self.resolve(LocalCatsRepositoryProtocol.self)
         }
         

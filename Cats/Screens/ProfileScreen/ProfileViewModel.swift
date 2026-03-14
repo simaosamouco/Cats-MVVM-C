@@ -34,16 +34,16 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     
     /// ViewModel dependencies
     private let coordinator: ProfileViewCoordinatorProtocol
-    private let catDetailLocalManagementUseCase: CatDetailLocalManagementUseCaseProtocol
+    private let catSaveUseCase: CatSaveUseCaseProtocol
     private let getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol
     
     init(cat: Cat,
          coordinator: ProfileViewCoordinatorProtocol,
-         catDetailLocalManagementUseCase: CatDetailLocalManagementUseCaseProtocol,
+         catSaveUseCase: CatSaveUseCaseProtocol,
          getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol) {
         self.cat = cat
         self.coordinator = coordinator
-        self.catDetailLocalManagementUseCase = catDetailLocalManagementUseCase
+        self.catSaveUseCase = catSaveUseCase
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
         self.breedName = cat.breedName
         self.breedDescription = cat.breedDescription
@@ -54,7 +54,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     /// to update the navigation bar item based on the `Cat` saved status in device memory.
     func checkCatSavedStatus() async {
         do {
-            let saved = try await catDetailLocalManagementUseCase.isCatSaved(cat)
+            let saved = try await catSaveUseCase.isCatSaved(cat)
             await MainActor.run {
                 isCatSaved = saved
             }
@@ -88,12 +88,12 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     
     /// Attempts to delete `Cat` from device memory
     private func deleteCat() async throws {
-        try await catDetailLocalManagementUseCase.deleteCat(cat)
+        try await catSaveUseCase.deleteCat(cat)
     }
     
     /// Attempts to save `Cat` in device memory
     private func saveCat() async throws {
-        try await catDetailLocalManagementUseCase.saveCat(cat)
+        try await catSaveUseCase.saveCat(cat)
     }
     
 }

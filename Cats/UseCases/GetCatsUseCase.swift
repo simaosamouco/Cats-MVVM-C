@@ -19,9 +19,9 @@ extension GetCatsUseCaseProtocol {
 
 final class GetCatsUseCase: GetCatsUseCaseProtocol {
     
-    private let repository: CatsRepositoryProtocol
+    private let repository: CatsFetchRepositoryProtocol
     
-    init(repository: CatsRepositoryProtocol) {
+    init(repository: CatsFetchRepositoryProtocol) {
         self.repository = repository
     }
     
