@@ -13,3 +13,9 @@ protocol CatsRepositoryProtocol {
     /// - Returns: An array of `Cat` models for the requested page.
     func get(for page: Int) async throws -> [Cat]
 }
+
+protocol CatDetailRepositoryProtocol {
+    func saveCat(_ cat: Cat) async throws
+    func deleteCat(_ cat: Cat) async throws
+    func isCatSaved(_ cat: Cat) async throws -> Bool
+}

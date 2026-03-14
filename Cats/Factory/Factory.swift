@@ -14,7 +14,7 @@ protocol FactoryProtocol: AnyObject {
     func createCatsListController(navController: UINavigationController) -> UIViewController
     func createSavedCatsViewController(navController: UINavigationController) -> UIViewController
     func createProfileViewController(navController: UINavigationController,
-                                     cat: CatProfileModel) -> UIViewController
+                                     cat: Cat) -> UIViewController
     func createSettingsViewController(navController: UINavigationController) -> UIViewController
     func createAboutViewController(navController: UINavigationController) -> UIViewController
     func createTestViewController(navController: UINavigationController,
@@ -83,18 +83,19 @@ final class Factory: FactoryProtocol {
     }
     
     func createProfileViewController(navController: UINavigationController,
-                                     cat: CatProfileModel) -> UIViewController {
+                                     cat: Cat) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
-        let catsPersistanceUseCase = resolve(CatsPersistanceUseCaseProtocol.self)
+        let catDetailRepository = resolve(CatDetailRepositoryProtocol.self)
+        let catDetailLocalManagementUseCase = CatDetailLocalManagementUseCase(catDetailRepository: catDetailRepository)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         let viewModel = ProfileViewModel(
-            catProfile: cat,
+            cat: cat,
             coordinator: ProfileViewCoordinator(
                 factory: self,
                 coreCoordinator: coreCoordinator
             ),
-            catsPersistanceUseCase: catsPersistanceUseCase,
+            catDetailLocalManagementUseCase: catDetailLocalManagementUseCase,
             getImageFromUrlUseCase: getImageUseCase
         )
         return ProfileViewController(viewModel: viewModel)

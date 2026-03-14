@@ -30,20 +30,20 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     }
     
     /// Internal State vars
-    private let cat: CatProfileModel
+    private let cat: Cat
     
     /// ViewModel dependencies
     private let coordinator: ProfileViewCoordinatorProtocol
-    private let catsPersistanceUseCase: CatsPersistanceUseCaseProtocol
+    private let catDetailLocalManagementUseCase: CatDetailLocalManagementUseCaseProtocol
     private let getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol
     
-    init(catProfile: CatProfileModel,
+    init(cat: Cat,
          coordinator: ProfileViewCoordinatorProtocol,
-         catsPersistanceUseCase: CatsPersistanceUseCaseProtocol,
+         catDetailLocalManagementUseCase: CatDetailLocalManagementUseCaseProtocol,
          getImageFromUrlUseCase: GetImageFromUrlUseCaseProtocol) {
-        self.cat = catProfile
+        self.cat = cat
         self.coordinator = coordinator
-        self.catsPersistanceUseCase = catsPersistanceUseCase
+        self.catDetailLocalManagementUseCase = catDetailLocalManagementUseCase
         self.getImageFromUrlUseCase = getImageFromUrlUseCase
         self.breedName = cat.breedName
         self.breedDescription = cat.breedDescription
@@ -54,7 +54,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     /// to update the navigation bar item based on the `Cat` saved status in device memory.
     func checkCatSavedStatus() async {
         do {
-            let saved = try await catsPersistanceUseCase.isCatSaved(id: cat.id)
+            let saved = try await catDetailLocalManagementUseCase.isCatSaved(cat)
             await MainActor.run {
                 isCatSaved = saved
             }
@@ -88,21 +88,12 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     
     /// Attempts to delete `Cat` from device memory
     private func deleteCat() async throws {
-        try await catsPersistanceUseCase.deleteCat(
-            id: cat.id,
-            url: cat.url,
-            breedName: cat.breedName
-        )
+        try await catDetailLocalManagementUseCase.deleteCat(cat)
     }
     
     /// Attempts to save `Cat` in device memory
     private func saveCat() async throws {
-        try await catsPersistanceUseCase.saveCat(
-            id: cat.id,
-            url: cat.url,
-            breedName: cat.breedName,
-            breedDescription: cat.breedDescription
-        )
+        try await catDetailLocalManagementUseCase.saveCat(cat)
     }
     
 }

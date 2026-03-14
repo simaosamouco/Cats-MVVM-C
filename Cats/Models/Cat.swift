@@ -17,6 +17,7 @@ struct Cat {
 }
 
 extension Cat: Decodable {
+    
     private enum CodingKeys: String, CodingKey {
         case id, url, breeds
     }
@@ -34,15 +35,5 @@ extension Cat: Decodable {
         self.breedName = breeds?.first?.name ?? "Unknown"
         self.breedDescription = breeds?.first?.description ?? "Unknown"
     }
-}
-
-extension Cat {
-    func toCatProfile() -> CatProfileModel {
-        return CatProfileModel(
-            id: self.id,
-            breedName: self.breedName,
-            breedDescription: self.breedDescription,
-            url: self.url
-        )
-    }
+    
 }

@@ -51,6 +51,10 @@ extension Factory {
             return LocalCatsRepository(store: persistenceStore)
         }
 
+        registerLazy(CatDetailRepositoryProtocol.self) {
+            return self.resolve(LocalCatsRepositoryProtocol.self)
+        }
+        
         /// GetImageFromUrlUseCaseProtocol
         registerLazy(GetImageFromUrlUseCaseProtocol.self) {
             let imageRepository = self.resolve(ImageRepositoryProtocol.self)
@@ -70,10 +74,10 @@ extension Factory {
         }
 
         /// CatsPersistanceUseCaseProtocol
-        registerLazy(CatsPersistanceUseCaseProtocol.self) {
-            let store = self.resolve(PersistenceStoreProtocol.self)
-            return CatsPersistanceUseCase(store: store)
-        }
+//        registerLazy(CatsPersistanceUseCaseProtocol.self) {
+//            let store = self.resolve(PersistenceStoreProtocol.self)
+//            return CatsPersistanceUseCase(store: store)
+//        }
 
         /// CoreCoordinatorProtocol (factory with argument)
         registerFactory(CoreCoordinatorProtocol.self) { navigationController in
