@@ -86,8 +86,8 @@ final class Factory: FactoryProtocol {
                                      cat: Cat) -> UIViewController {
         let coreCoordinator = resolve(CoreCoordinatorProtocol.self,
                                       argument: navController)
-        let catDetailRepository = resolve(CatsPersistenceRepositoryProtocol.self)
-        let catSaveUseCase = CatSaveUseCase(catDetailRepository: catDetailRepository)
+        let catPersistenceRepository = resolve(CatsPersistenceRepositoryProtocol.self)
+        let catSaveUseCase = CatSaveUseCase(catPersistenceRepository: catPersistenceRepository)
         let getImageUseCase = resolve(GetImageFromUrlUseCaseProtocol.self)
         let viewModel = ProfileViewModel(
             cat: cat,

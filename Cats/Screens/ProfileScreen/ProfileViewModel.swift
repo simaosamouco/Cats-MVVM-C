@@ -70,7 +70,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         }
     }
     
-    /// Called by the `ViewController` when the trailing navigation item gets tapped
+    /// Called by the `View` when the trailing navigation item gets tapped
     /// Based on the saved status calls delete or save cat methods
     /// Displays error message case it fails.
     func didTapSaveButton() {

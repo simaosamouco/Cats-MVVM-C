@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A concrete implementation of `LocalCatsRepositoryProtocol` that fetches cats
+/// A concrete implementation of `LocalCatsRepositoryProtocol` that fetches, saves, deletes
 /// from local persistence via a `PersistenceStoreProtocol`.
 final class LocalCatsRepository: LocalCatsRepositoryProtocol {
     
@@ -23,6 +23,7 @@ final class LocalCatsRepository: LocalCatsRepositoryProtocol {
     }
     
     func saveCat(_ cat: Cat) async throws {
+        // Map domain model to SwiftData model before inserting into the store
         let cat = CatSwiftData(
             id: cat.id,
             url: cat.url,

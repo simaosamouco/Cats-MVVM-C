@@ -1,5 +1,5 @@
 //
-//  CatDetailLocalManagementUseCase.swift
+//  CatSaveUseCase.swift
 //  Cats
 //
 //  Created by Simão Neves Samouco on 07/08/2025.
@@ -11,27 +11,27 @@ protocol CatSaveUseCaseProtocol {
     func isCatSaved(_ cat: Cat) async throws -> Bool
 }
 
-/// TODO: Add documentation explaing that this use case might look pointless
-///  The goal is to follow the same patterns as other view model
-///  And if in the future extra logic is required (like transform the object to a certain type) this use case would be useful
+/// This use case delegates persistence, following the same structure as other use cases.
+/// It enables future enhancements such as data transformation, validation, analytics, or side effects,
+/// keeping the ViewModel decoupled from infrastructure.
 final class CatSaveUseCase: CatSaveUseCaseProtocol {
     
-    private let catDetailRepository: CatsPersistenceRepositoryProtocol
+    private let catPersistenceRepository: CatsPersistenceRepositoryProtocol
     
-    init(catDetailRepository: CatsPersistenceRepositoryProtocol) {
-        self.catDetailRepository = catDetailRepository
+    init(catPersistenceRepository: CatsPersistenceRepositoryProtocol) {
+        self.catPersistenceRepository = catPersistenceRepository
     }
     
     func saveCat(_ cat: Cat) async throws {
-        try await catDetailRepository.saveCat(cat)
+        try await catPersistenceRepository.saveCat(cat)
     }
     
     func deleteCat(_ cat: Cat) async throws {
-        try await catDetailRepository.deleteCat(cat)
+        try await catPersistenceRepository.deleteCat(cat)
     }
     
     func isCatSaved(_ cat: Cat) async throws -> Bool {
-        try await catDetailRepository.isCatSaved(cat)
+        try await catPersistenceRepository.isCatSaved(cat)
     }
     
 }
