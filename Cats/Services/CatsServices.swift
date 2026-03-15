@@ -33,13 +33,14 @@ final class CatsServices: CatsServicesProtocol {
     
     /// Fetches a list of cats for a given page asynchronously.
     func getCats(page: Int) async throws -> [Cat] {
-        let catsData = try await fetchData(from: Endpoints.getCats(page: page).url())
+        let endpoint = try Endpoints.getCats(page: page).urlRequest()
+        let catsData = try await fetchData(from: endpoint)
         return try decode([Cat].self, from: catsData)
     }
     
     /// Fetches raw data from the given URL using the injected network service.
-    private func fetchData(from url: URL) async throws -> Data {
-        return try await networkService.fetchData(from: url)
+    private func fetchData(from request: URLRequest) async throws -> Data {
+        return try await networkService.fetchData(from: request)
     }
     
     /// Decodes JSON data into a specified `Decodable` type.
