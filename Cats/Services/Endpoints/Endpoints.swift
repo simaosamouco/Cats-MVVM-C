@@ -30,6 +30,4 @@ enum Endpoints {
                  hasBreeds: Bool = true,
                  order: Order = .random)
     
-    
-    
 }
