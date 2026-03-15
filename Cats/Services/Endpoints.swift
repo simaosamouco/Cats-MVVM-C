@@ -9,6 +9,7 @@
 
 import Foundation
 
+/// Defines the sort order for cat image results.
 enum Order: String {
     case random = "rand"
     case ascending = "asc"
@@ -29,37 +30,51 @@ enum Endpoints {
                  hasBreeds: Bool = true,
                  order: Order = .random)
     
-    /// The API key used for authenticating requests to The Cat API.
-    private static var apiKey: String {
-        Bundle.main.infoDictionary?["CAT_API_KEY"] as? String ?? ""
+    /// Constructs a `URLRequest` for the given endpoint, including the URL and authentication headers.
+    /// - Returns: A fully configured `URLRequest` ready to be executed by the network layer.
+    /// - Throws: `CatsError.invalidURL` if the URL cannot be constructed.
+    func urlRequest() throws -> URLRequest {
+        var request = URLRequest(url: try makeURL())
+        request.httpMethod = "GET"
+        headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
+        return request
     }
-
+    
     /// Constructs the URL for the given endpoint case.
-    /// - Returns: A fully formed URL for the endpoint.
-    /// - Throws: `CatsErrors.invalidURL` if the URL cannot be constructed.
-    func url() throws -> URL {
+    /// - Throws: `CatsError.invalidURL` if the URL cannot be constructed.
+    private func makeURL() throws -> URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.thecatapi.com"
-        
-        // Configure URL components based on the endpoint case.
+        components.path = path
+        components.queryItems = queryItems
+        guard let url = components.url else { throw CatsError.invalidURL }
+        return url
+    }
+    
+    /// The path component for the given endpoint case.
+    private var path: String {
+        switch self {
+        case .getCats: return "/v1/images/search"
+        }
+    }
+    
+    /// The query items for the given endpoint case.
+    private var queryItems: [URLQueryItem] {
         switch self {
         case .getCats(let page, let limit, let hasBreeds, let order):
-            components.path = "/v1/images/search"
-            components.queryItems = [
-                URLQueryItem(name: "limit", value: "\(limit)"),
-                URLQueryItem(name: "page", value: "\(page)"),
+            return [
+                URLQueryItem(name: "limit", value: String(limit)),
+                URLQueryItem(name: "page", value: String(page)),
                 URLQueryItem(name: "has_breeds", value: hasBreeds ? "1" : "0"),
-                URLQueryItem(name: "order", value: order.rawValue),
-                URLQueryItem(name: "api_key", value: Endpoints.apiKey)
+                URLQueryItem(name: "order", value: order.rawValue)
             ]
         }
-
-        guard let url = components.url else {
-            throw CatsError.invalidURL
-        }
-
-        return url
+    }
+    
+    /// HTTP headers to be attached to the request, including API key authentication.
+    private var headers: [String: String] {
+        ["x-api-key": Secrets.catAPIKey]
     }
     
 }
